@@ -56,3 +56,13 @@ Thumbs.db
 # generated native folders
 /ios
 /android
+
+# Next.js
+.next/
+out/
+
+# Vercel
+.vercel/
+
+# build artifacts
+coverage/

@@ -1,0 +1,7 @@
+{
+  "extends": "@m2/config/tsconfig/react-library",
+  "compilerOptions": {
+    "noEmit": true
+  },
+  "include": ["src/**/*"]
+}

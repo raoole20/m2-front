@@ -7,10 +7,16 @@ Monorepo for the Motomoto mobile CRM and unified messaging platform. Manages cus
 ```
 m2-front/
 ├── apps/
-│   └── mobile/          — @m2/mobile : Expo SDK 55 + React Native 0.83 app
+│   ├── mobile/          — @m2/mobile     : Expo SDK 55 + React Native 0.83
+│   ├── landing/         — @m2/landing    : Next.js 15 marketing site
+│   └── admin/           — @m2/admin      : Next.js 15 admin dashboard
 ├── packages/
-│   ├── types/           — @m2/types  : shared TypeScript interfaces
-│   └── design/          — @m2/design : design tokens (colors, spacing, typography)
+│   ├── types/           — @m2/types      : shared TypeScript interfaces
+│   ├── design/          — @m2/design     : design tokens + Tailwind preset
+│   ├── ui/              — @m2/ui         : shared React components (web)
+│   ├── api-client/      — @m2/api-client : typed client for m2-back
+│   ├── i18n/            — @m2/i18n       : next-intl config + en/es messages
+│   └── config/          — @m2/config     : shared tsconfig/eslint/prettier/tailwind presets
 ├── pnpm-workspace.yaml
 ├── turbo.json
 ├── tsconfig.base.json
@@ -20,8 +26,14 @@ m2-front/
 | Package | Description |
 |---|---|
 | `@m2/mobile` | Expo/React Native app — the phone client |
-| `@m2/types` | Pure TypeScript interfaces consumed by mobile (and future web apps) |
-| `@m2/design` | Design tokens (color palettes, spacing scale, typography) |
+| `@m2/landing` | Public marketing site (Next.js, SSG, i18n es/en) |
+| `@m2/admin` | Auth-gated admin dashboard (Next.js, JWT via `@m2/api-client`) |
+| `@m2/types` | Pure TypeScript interfaces consumed by mobile + web apps |
+| `@m2/design` | Design tokens (colors, spacing, typography, radii, glows) + Tailwind preset |
+| `@m2/ui` | Glassmorphism + gradient React components for web |
+| `@m2/api-client` | Fetcher, token store, typed client; codegen from `/api/docs-json` |
+| `@m2/i18n` | next-intl shared config + message catalogs |
+| `@m2/config` | Shared tooling presets (tsconfig, eslint, prettier, tailwind) |
 
 ## Stack
 
@@ -75,13 +87,74 @@ pnpm config set long-paths true
 
 ```bash
 pnpm install                         # install all workspace deps
-pnpm --filter @m2/mobile start       # start Metro for mobile
 pnpm -w typecheck                    # typecheck all workspaces via Turbo
-pnpm -w build                        # build all workspaces (no-op for mobile)
-pnpm -w lint                         # lint all workspaces (once configured)
+pnpm -w build                        # build all workspaces
+pnpm -w lint                         # lint all workspaces
+
+# Mobile
+pnpm mobile start                    # start Metro for mobile
 pnpm mobile android                  # open Android dev client
 pnpm mobile ios                      # open iOS simulator
+
+# Web apps
+pnpm dev:landing                     # Landing at http://localhost:3001
+pnpm dev:admin                       # Admin at http://localhost:3002
+pnpm build:web                       # Build both landing + admin
+pnpm --filter @m2/api-client generate:api   # codegen when backend is running
 ```
+
+## Web Apps
+
+| App | Local URL | Deploy target | Role |
+|---|---|---|---|
+| Landing (`@m2/landing`) | `http://localhost:3001` | `motomoto.app` | Public marketing + signup CTA |
+| Admin (`@m2/admin`) | `http://localhost:3002` | `app.motomoto.app` | JWT-gated dashboard / inbox / profile |
+
+### Environment variables
+
+Copy each app's `.env.example` to `.env.local` and fill the values.
+
+**Landing** (`apps/landing/.env.local`):
+- `NEXT_PUBLIC_API_URL` — e.g. `http://localhost:3000`
+- `NEXT_PUBLIC_SITE_URL` — e.g. `http://localhost:3001`
+- `NEXT_PUBLIC_ADMIN_URL` — e.g. `http://localhost:3002`
+- `NEXT_PUBLIC_DEFAULT_LOCALE` — `es` (default) or `en`
+
+**Admin** (`apps/admin/.env.local`):
+- `NEXT_PUBLIC_API_URL`
+- `NEXT_PUBLIC_SITE_URL`
+- `NEXT_PUBLIC_LANDING_URL`
+- `NEXT_PUBLIC_DEFAULT_LOCALE`
+
+### Backend CORS (local)
+
+`m2-back` must allow both web origins. In its `.env`:
+
+```env
+CORS_ORIGIN=http://localhost:3001,http://localhost:3002
+```
+
+### Smoke test (manual)
+
+1. Landing at `/` (es) and `/en` (en) — hero renders, locale switch works
+2. Landing CTA "Iniciar sesión" opens `/admin/login`
+3. Admin login with valid credentials → redirect to `/admin`
+4. Dashboard shows KPI cards
+5. Inbox list + detail load; 5s polling refreshes data
+6. Profile page shows user; logout clears session
+7. Middleware redirects unauthenticated users to `/admin/login`
+
+### Vercel deploy
+
+- **Landing project**: Root `apps/landing`, build `pnpm turbo run build --filter=@m2/landing...`
+- **Admin project**: Root `apps/admin`, build `pnpm turbo run build --filter=@m2/admin...`
+- Both projects import the same monorepo (`raoole20/m2-front`).
+
+### Production DNS
+
+- `motomoto.app` → Vercel landing
+- `www.motomoto.app` → 308 redirect to `motomoto.app`
+- `app.motomoto.app` → Vercel admin
 
 ## Path Aliases
 

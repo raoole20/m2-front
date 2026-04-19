@@ -1,0 +1,80 @@
+{
+  "landing": {
+    "nav": {
+      "login": "Log in"
+    },
+    "hero": {
+      "badge": "Luminous Executive Stack",
+      "title": "Turn scattered conversations into clear revenue",
+      "subtitle": "Motomoto unifies WhatsApp, Instagram and email with AI to prioritize opportunities in seconds.",
+      "primaryCta": "Open admin",
+      "secondaryCta": "Contact sales"
+    },
+    "channels": {
+      "whatsapp": "WhatsApp",
+      "instagram": "Instagram",
+      "telegram": "Telegram",
+      "email": "Email"
+    },
+    "features": {
+      "title": "Everything in one view",
+      "f1": {
+        "title": "Unified inbox",
+        "description": "Merge channels and stop losing clients due to fragmented context."
+      },
+      "f2": {
+        "title": "Smart priority",
+        "description": "Detect hot conversations and suggest actionable replies."
+      },
+      "f3": {
+        "title": "Full traceability",
+        "description": "Every step stays visible for teams, managers and operations."
+      },
+      "f4": {
+        "title": "Live KPIs",
+        "description": "Track conversion, SLA and workload with clarity."
+      },
+      "f5": {
+        "title": "Roles and permissions",
+        "description": "Control access by role without extra complexity."
+      },
+      "f6": {
+        "title": "Tenant-ready scale",
+        "description": "Architecture ready to grow from small teams to regional operations."
+      }
+    },
+    "ai": {
+      "eyebrow": "Contextual AI",
+      "title": "Suggest, summarize and classify inside the workflow",
+      "description": "Motomoto AI does not interrupt: it amplifies teams with context, urgency and suggested actions."
+    },
+    "testimonials": {
+      "title": "Teams already operating at higher pace",
+      "t1": {
+        "name": "Ana Perez",
+        "role": "Head of Support",
+        "quote": "We reduced first-response time and stopped losing threads across channels."
+      },
+      "t2": {
+        "name": "Carlos Rojas",
+        "role": "Sales Manager",
+        "quote": "The commercial team now knows where to focus every hour of the day."
+      }
+    },
+    "pricing": {
+      "title": "Pricing tailored to your team",
+      "description": "V1 includes guided onboarding and setup adapted to your operation.",
+      "cta": "Contact sales"
+    },
+    "footer": {
+      "tagline": "Unified messaging CRM",
+      "contact": "Contact",
+      "home": "Home",
+      "copyright": "Copyright {year} Motomoto"
+    },
+    "contact": {
+      "title": "Let us map your operation",
+      "description": "Email us and we will help design the right flow for your team."
+    }
+  }
+}

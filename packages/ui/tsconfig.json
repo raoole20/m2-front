@@ -1,0 +1,9 @@
+{
+  "extends": "@m2/config/tsconfig/react-library",
+  "compilerOptions": {
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "types": ["react", "react-dom"]
+  },
+  "include": ["src/**/*"]
+}

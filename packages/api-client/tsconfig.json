@@ -1,0 +1,8 @@
+{
+  "extends": "@m2/config/tsconfig/react-library",
+  "compilerOptions": {
+    "outDir": "dist",
+    "types": ["node"]
+  },
+  "include": ["src/**/*", "scripts/**/*"]
+}

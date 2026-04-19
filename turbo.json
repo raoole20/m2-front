@@ -2,27 +2,45 @@
   "$schema": "https://turbo.build/schema.json",
   "globalDependencies": [
     "tsconfig.base.json",
-    ".npmrc"
+    ".npmrc",
+    ".eslintrc.base.cjs",
+    ".prettierrc.cjs"
   ],
   "globalEnv": [
     "NODE_ENV",
-    "EXPO_PUBLIC_*"
+    "EXPO_PUBLIC_*",
+    "NEXT_PUBLIC_*"
   ],
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
       "inputs": [
         "src/**",
+        "app/**",
+        "i18n/**",
+        "messages/**",
+        "public/**",
+        "middleware.ts",
+        "next.config.ts",
+        "next.config.js",
+        "postcss.config.cjs",
+        "tailwind.config.ts",
         "package.json",
         "tsconfig.json"
       ],
-      "outputs": ["dist/**"]
+      "outputs": ["dist/**", ".next/**", "!.next/cache/**"]
     },
     "typecheck": {
       "dependsOn": ["^typecheck"],
       "inputs": [
         "src/**",
         "app/**",
+        "i18n/**",
+        "scripts/**",
+        "middleware.ts",
+        "next.config.ts",
+        "next-env.d.ts",
+        "tailwind.config.ts",
         "package.json",
         "tsconfig.json",
         "tsconfig.base.json"
@@ -33,6 +51,10 @@
       "inputs": [
         "src/**",
         "app/**",
+        "i18n/**",
+        "messages/**",
+        "middleware.ts",
+        "next.config.ts",
         ".eslintrc*",
         "package.json"
       ],
@@ -41,6 +63,9 @@
     "dev": {
       "cache": false,
       "persistent": true
+    },
+    "generate:api": {
+      "cache": false
     },
     "clean": {
       "cache": false

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Motomoto OG">
+  <defs>
+    <radialGradient id="a" cx="20%" cy="20%" r="70%">
+      <stop offset="0%" stop-color="#ADC6FF" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#161515" stop-opacity="1"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#a)"/>
+  <text x="90" y="300" fill="#E7E3E3" font-family="Manrope, sans-serif" font-size="82" font-weight="800">m2 · Motomoto</text>
+  <text x="90" y="368" fill="#C6C2C2" font-family="Inter, sans-serif" font-size="34">Unified conversational CRM</text>
+</svg>

@@ -1,0 +1,21 @@
+{
+  "name": "@m2/api-client",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "tsc -p tsconfig.json",
+    "generate:api": "tsx scripts/generate.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.9",
+    "@m2/config": "workspace:*",
+    "openapi-typescript": "^7.5.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3"
+  }
+}

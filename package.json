@@ -5,19 +5,31 @@
   "scripts": {
     "dev": "turbo run dev",
     "build": "turbo run build",
+    "build:web": "turbo run build --filter=@m2/landing --filter=@m2/admin",
     "typecheck": "turbo run typecheck",
     "lint": "turbo run lint",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "clean": "turbo run clean && rimraf node_modules .turbo",
     "mobile": "pnpm --filter @m2/mobile",
-    "mobile:start": "pnpm --filter @m2/mobile start"
+    "mobile:start": "pnpm --filter @m2/mobile start",
+    "dev:landing": "pnpm --filter @m2/landing dev",
+    "dev:admin": "pnpm --filter @m2/admin dev"
   },
   "devDependencies": {
     "turbo": "^2.3.0",
     "typescript": "~5.9.2",
-    "rimraf": "^5.0.10"
+    "rimraf": "^5.0.10",
+    "prettier": "^3.3.3"
   },
   "engines": {
     "node": ">=20.19.4",
     "pnpm": ">=9.0.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "react": "19.2.0",
+      "react-dom": "19.2.0"
+    }
   }
 }

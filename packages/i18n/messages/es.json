@@ -1,0 +1,33 @@
+{
+  "brand": {
+    "name": "Motomoto",
+    "tagline": "CRM conversacional unificado"
+  },
+  "channels": {
+    "whatsapp": "WhatsApp",
+    "instagram": "Instagram",
+    "messenger": "Messenger",
+    "email": "Correo",
+    "telegram": "Telegram",
+    "sms": "SMS"
+  },
+  "cta": {
+    "login": "Iniciar sesion",
+    "logout": "Cerrar sesion",
+    "continue": "Continuar",
+    "cancel": "Cancelar",
+    "contactSales": "Contactar ventas"
+  },
+  "form": {
+    "errors": {
+      "emailInvalid": "Correo invalido",
+      "passwordTooShort": "La clave debe tener al menos 8 caracteres",
+      "required": "Este campo es obligatorio"
+    }
+  },
+  "toast": {
+    "forbidden": "No tienes permiso para esta accion",
+    "serverError": "Error del servidor",
+    "networkError": "Sin conexion"
+  }
+}

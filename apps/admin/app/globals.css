@@ -1,0 +1,16 @@
+@import "@m2/design/css/tokens.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  background: radial-gradient(circle at top, rgba(173, 198, 255, 0.16), transparent 45%), #161515;
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+}

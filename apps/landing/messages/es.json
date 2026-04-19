@@ -1,0 +1,80 @@
+{
+  "landing": {
+    "nav": {
+      "login": "Iniciar sesion"
+    },
+    "hero": {
+      "badge": "Luminous Executive Stack",
+      "title": "Convierte conversaciones dispersas en ingresos claros",
+      "subtitle": "Motomoto centraliza WhatsApp, Instagram y correo con IA para priorizar oportunidades en segundos.",
+      "primaryCta": "Entrar al admin",
+      "secondaryCta": "Contactar ventas"
+    },
+    "channels": {
+      "whatsapp": "WhatsApp",
+      "instagram": "Instagram",
+      "telegram": "Telegram",
+      "email": "Correo"
+    },
+    "features": {
+      "title": "Todo en una sola vista",
+      "f1": {
+        "title": "Bandeja unificada",
+        "description": "Consolida canales y evita perder clientes por contexto fragmentado."
+      },
+      "f2": {
+        "title": "Prioridad inteligente",
+        "description": "Detecta conversaciones calientes y sugiere respuestas accionables."
+      },
+      "f3": {
+        "title": "Trazabilidad total",
+        "description": "Cada paso queda visible para equipo, managers y operaciones."
+      },
+      "f4": {
+        "title": "KPIs en tiempo real",
+        "description": "Monitorea conversion, SLA y carga operativa con claridad."
+      },
+      "f5": {
+        "title": "Roles y permisos",
+        "description": "Controla acceso por rol sin complejidad adicional."
+      },
+      "f6": {
+        "title": "Escalable por tenant",
+        "description": "Arquitectura lista para crecer de equipos pequenos a operaciones regionales."
+      }
+    },
+    "ai": {
+      "eyebrow": "IA contextual",
+      "title": "Sugiere, resume y clasifica en el flujo de trabajo",
+      "description": "La IA de Motomoto no interrumpe: amplifica al equipo con contexto, urgencia y acciones sugeridas."
+    },
+    "testimonials": {
+      "title": "Equipos que ya operan con ritmo",
+      "t1": {
+        "name": "Ana Perez",
+        "role": "Head of Support",
+        "quote": "Reducimos los tiempos de primera respuesta y dejamos de perder hilos entre canales."
+      },
+      "t2": {
+        "name": "Carlos Rojas",
+        "role": "Sales Manager",
+        "quote": "El equipo comercial ahora sabe donde enfocarse cada hora del dia."
+      }
+    },
+    "pricing": {
+      "title": "Pricing a tu medida",
+      "description": "V1 incluye onboarding guiado y configuracion adaptada a tu operacion.",
+      "cta": "Contactar ventas"
+    },
+    "footer": {
+      "tagline": "CRM de mensajeria unificada",
+      "contact": "Contacto",
+      "home": "Inicio",
+      "copyright": "Copyright {year} Motomoto"
+    },
+    "contact": {
+      "title": "Hablemos de tu operacion",
+      "description": "Escribenos y te ayudamos a mapear el flujo ideal para tu equipo."
+    }
+  }
+}

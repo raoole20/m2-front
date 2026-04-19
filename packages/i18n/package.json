@@ -1,0 +1,20 @@
+{
+  "name": "@m2/i18n",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./messages/es": "./messages/es.json",
+    "./messages/en": "./messages/en.json"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "next-intl": "^4.0.0"
+  },
+  "devDependencies": {
+    "@m2/config": "workspace:*"
+  }
+}

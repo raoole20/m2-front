@@ -4,8 +4,17 @@
   "private": true,
   "main": "src/index.ts",
   "types": "src/index.ts",
-  "sideEffects": false,
-  "files": ["src"],
+  "sideEffects": ["*.css"],
+  "files": ["src", "css", "tailwind-preset.cjs"],
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    },
+    "./tailwind-preset": "./src/tailwind-preset.ts",
+    "./tailwind-preset.cjs": "./tailwind-preset.cjs",
+    "./css/tokens.css": "./css/tokens.css"
+  },
   "scripts": {
     "typecheck": "tsc --noEmit",
     "clean": "rimraf .turbo"
