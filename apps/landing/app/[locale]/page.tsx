@@ -3,14 +3,15 @@ import { notFound } from "next/navigation";
 
 import { defaultLocale, locales } from "@m2/i18n";
 
-import { AIHighlight } from "./_components/AIHighlight";
-import { ChannelsStrip } from "./_components/ChannelsStrip";
-import { FeaturesGrid } from "./_components/FeaturesGrid";
+import type { Lang } from "../../lib/content";
+import { Channels } from "./_components/Channels";
+import { FinalCTA } from "./_components/FinalCTA";
 import { Footer } from "./_components/Footer";
 import { Hero } from "./_components/Hero";
-import { Navbar } from "./_components/Navbar";
-import { PricingCTA } from "./_components/PricingCTA";
-import { Testimonials } from "./_components/Testimonials";
+import { HowItWorks } from "./_components/HowItWorks";
+import { InboxSection } from "./_components/InboxSection";
+import { Nav } from "./_components/Nav";
+import { Pricing } from "./_components/Pricing";
 
 export default async function LandingPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -18,18 +19,20 @@ export default async function LandingPage({ params }: { params: Promise<{ locale
     notFound();
   }
 
-  const activeLocale = locale || defaultLocale;
+  const activeLocale = (locale || defaultLocale) as Lang;
 
   return (
-    <main className="pb-10">
-      <Navbar locale={activeLocale} />
-      <Hero locale={activeLocale} />
-      <ChannelsStrip />
-      <FeaturesGrid />
-      <AIHighlight />
-      <Testimonials />
-      <PricingCTA />
+    <div className="prop-b">
+      <Nav locale={activeLocale} />
+      <main>
+        <Hero locale={activeLocale} />
+        <Channels />
+        <InboxSection />
+        <HowItWorks />
+        <Pricing />
+        <FinalCTA locale={activeLocale} />
+      </main>
       <Footer locale={activeLocale} />
-    </main>
+    </div>
   );
 }

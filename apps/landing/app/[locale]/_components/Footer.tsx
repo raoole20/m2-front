@@ -1,26 +1,68 @@
+import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 
+import type { Lang, NavLink } from "../../../lib/content";
+
 type FooterProps = {
-  locale: "es" | "en";
+  locale: Lang;
 };
 
 export async function Footer({ locale }: FooterProps) {
   const t = await getTranslations("landing.footer");
-  const year = new Date().getFullYear();
+  const productLinks = t.raw("productLinks") as NavLink[];
+  const companyLinks = t.raw("companyLinks") as NavLink[];
+  const legalLinks = t.raw("legalLinks") as NavLink[];
+  const otherLocale = locale === "es" ? "en" : "es";
+  const otherHref = otherLocale === "es" ? "/" : "/en";
 
   return (
-    <footer className="mt-24 border-t border-stroke-subtle/60 px-6 py-10">
-      <div className="mx-auto flex w-full max-w-6xl flex-col gap-3 text-sm text-text-secondary md:flex-row md:items-center md:justify-between">
-        <p>m2 · {t("tagline")}</p>
-        <div className="flex items-center gap-4">
-          <a className="hover:text-text-primary" href="mailto:contact@motomoto.app">
-            {t("contact")}
-          </a>
-          <a className="hover:text-text-primary" href={locale === "es" ? "/" : "/en"}>
-            {t("home")}
-          </a>
+    <footer className="foot">
+      <div className="container">
+        <div className="foot-grid">
+          <div className="foot-brand">
+            <Link className="logo" href={locale === "es" ? "/" : "/en"}>
+              <span className="mark">m</span>M2
+            </Link>
+            <p className="tagline">{t("tagline")}</p>
+            <Link className="nav-lang" href={otherHref}>
+              {otherLocale.toUpperCase()} ↔ {locale.toUpperCase()}
+            </Link>
+          </div>
+          <div className="foot-col">
+            <h4>{t("product")}</h4>
+            <ul>
+              {productLinks.map((l) => (
+                <li key={l.label}>
+                  <a href={l.href}>{l.label}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="foot-col">
+            <h4>{t("company")}</h4>
+            <ul>
+              {companyLinks.map((l) => (
+                <li key={l.label}>
+                  <a href={l.href}>{l.label}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="foot-col">
+            <h4>{t("legal")}</h4>
+            <ul>
+              {legalLinks.map((l) => (
+                <li key={l.label}>
+                  <a href={l.href}>{l.label}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
-        <p>{t("copyright", { year })}</p>
+        <div className="foot-bottom">
+          <span>{t("rights")}</span>
+          <span className="online">{t("online")}</span>
+        </div>
       </div>
     </footer>
   );

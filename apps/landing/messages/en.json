@@ -1,80 +1,198 @@
 {
   "landing": {
     "nav": {
-      "login": "Log in"
+      "login": "Log in",
+      "links": [
+        { "label": "Product", "href": "#channels" },
+        { "label": "Demo", "href": "#demo" },
+        { "label": "How it works", "href": "#how" },
+        { "label": "Pricing", "href": "#pricing" }
+      ]
     },
     "hero": {
-      "badge": "Luminous Executive Stack",
-      "title": "Turn scattered conversations into clear revenue",
-      "subtitle": "Motomoto unifies WhatsApp, Instagram and email with AI to prioritize opportunities in seconds.",
-      "primaryCta": "Open admin",
-      "secondaryCta": "Contact sales"
+      "kicker": "NATIVE AI · REPLIES 24/7",
+      "title": "The AI that replies for you.\nEverywhere.",
+      "subtitle": "M2 unifies WhatsApp, Instagram, Telegram and Email into one inbox — and answers in your brand voice, around the clock.",
+      "cta1": "Start 14-day trial",
+      "cta2": "See product",
+      "trial14": "14-day trial",
+      "noCard": "No card",
+      "setup3": "3-min setup",
+      "highlightKeywords": ["AI", "Turn conversations", "Stop losing"]
+    },
+    "chatStage": {
+      "streams": [
+        [
+          { "variant": "wa", "from": "WhatsApp · Laura", "text": "Ship to Monterrey?" },
+          { "variant": "m2", "from": "M2 · AI", "text": "Yes, 24-48h delivery. Want options?" },
+          { "variant": "wa", "from": "WhatsApp · Diego", "text": "Bank transfer ok?" },
+          { "variant": "m2", "from": "M2 · AI", "text": "Of course, sending details." }
+        ],
+        [
+          { "variant": "ig", "from": "Instagram · @mariana", "text": "Size M?" },
+          { "variant": "m2", "from": "M2 · AI", "text": "Yes, 3 in stock." },
+          { "variant": "em", "from": "Email · ana@acme", "text": "Proposal 50u." },
+          { "variant": "m2", "from": "M2 · AI", "text": "Hot lead → escalated" }
+        ],
+        [
+          { "variant": "tg", "from": "Telegram · Carlos", "text": "Support #4521" },
+          { "variant": "m2", "from": "M2 · AI", "text": "Routing to human agent." },
+          { "variant": "ig", "from": "Instagram · @foodie", "text": "Hours today?" },
+          { "variant": "m2", "from": "M2 · AI", "text": "Open 10am-10pm." }
+        ]
+      ]
     },
     "channels": {
-      "whatsapp": "WhatsApp",
-      "instagram": "Instagram",
-      "telegram": "Telegram",
-      "email": "Email"
+      "section": "CHANNELS",
+      "title": "Four channels. One inbox. Zero chaos.",
+      "lede": "Connect once. Reply anywhere. AI adapts tone, format and timing — never sounds like a bot.",
+      "volumeLabel": "today",
+      "sampleLabel": "Real message",
+      "items": [
+        {
+          "key": "whatsapp",
+          "name": "WhatsApp",
+          "volume": "8.2k",
+          "desc": "Auto-replies, templates and seamless handoff.",
+          "sample": "Hi, are you still open?"
+        },
+        {
+          "key": "instagram",
+          "name": "Instagram",
+          "volume": "3.4k",
+          "desc": "DMs, comments and story replies in one place.",
+          "sample": "How much is this product?"
+        },
+        {
+          "key": "telegram",
+          "name": "Telegram",
+          "volume": "1.1k",
+          "desc": "Bots and channels handled by AI and your team.",
+          "sample": "Need technical support"
+        },
+        {
+          "key": "email",
+          "name": "Email",
+          "volume": "940",
+          "desc": "Unified inbox with summaries and suggested replies.",
+          "sample": "Invoice for order #4521"
+        }
+      ]
     },
-    "features": {
-      "title": "Everything in one view",
-      "f1": {
-        "title": "Unified inbox",
-        "description": "Merge channels and stop losing clients due to fragmented context."
+    "demo": {
+      "section": "DEMO",
+      "title": "One inbox. All your messaging.",
+      "lede": "This is M2 when messages pour in from everywhere. Priority, AI draft and human handoff — one view.",
+      "tabs": { "inbox": "Inbox", "automations": "Automations", "analytics": "Analytics" },
+      "sidebar": {
+        "title": "Inbox",
+        "unread": "unread",
+        "allInbox": "All inbox"
       },
-      "f2": {
-        "title": "Smart priority",
-        "description": "Detect hot conversations and suggest actionable replies."
-      },
-      "f3": {
-        "title": "Full traceability",
-        "description": "Every step stays visible for teams, managers and operations."
-      },
-      "f4": {
-        "title": "Live KPIs",
-        "description": "Track conversion, SLA and workload with clarity."
-      },
-      "f5": {
-        "title": "Roles and permissions",
-        "description": "Control access by role without extra complexity."
-      },
-      "f6": {
-        "title": "Tenant-ready scale",
-        "description": "Architecture ready to grow from small teams to regional operations."
-      }
+      "priority": "High priority",
+      "aiDraftLabel": "M2 · AI draft",
+      "aiTagLine": "· AI tagged as \"hot lead\" · 92% confidence ·",
+      "aiDraft": "Hi Laura! Yes, we ship to Monterrey in 24–48h. Free shipping on orders over $75. Want me to share the catalog?",
+      "draftReady": "Draft ready to send — tweak tone or send as-is.",
+      "edit": "Edit",
+      "send": "Send",
+      "aiSummary": "AI summary",
+      "priorityScore": "Priority score",
+      "suggestedActions": "Suggested actions",
+      "newCustomer": "New customer",
+      "aiSummaryBody": "Asking about shipping to Monterrey. Medium-high interest in winter jackets.",
+      "actions": [
+        "Send fall/winter catalog",
+        "Schedule 24h follow-up",
+        "Tag as \"MTY · new\""
+      ],
+      "channelSummary": [
+        { "key": "all", "label": "All inbox", "volume": "13.6k" },
+        { "key": "whatsapp", "label": "WhatsApp", "volume": "8.2k" },
+        { "key": "instagram", "label": "Instagram", "volume": "3.4k" },
+        { "key": "telegram", "label": "Telegram", "volume": "1.1k" },
+        { "key": "email", "label": "Email", "volume": "940" }
+      ],
+      "items": [
+        { "name": "Laura G.", "channel": "whatsapp", "preview": "Ship to Monterrey?", "time": "2m", "initials": "LG" },
+        { "name": "@mariana.d", "channel": "instagram", "preview": "Size M available?", "time": "5m", "initials": "M" },
+        { "name": "Carlos R.", "channel": "telegram", "preview": "Support order #4521", "time": "12m", "initials": "CR" },
+        { "name": "ana@acme.co", "channel": "email", "preview": "Proposal 50 units", "time": "1h", "initials": "A" },
+        { "name": "Jorge L.", "channel": "whatsapp", "preview": "Quote 10 units", "time": "2h", "initials": "JL" },
+        { "name": "@foodielover", "channel": "instagram", "preview": "Today's hours?", "time": "3h", "initials": "F" }
+      ]
     },
-    "ai": {
-      "eyebrow": "Contextual AI",
-      "title": "Suggest, summarize and classify inside the workflow",
-      "description": "Motomoto AI does not interrupt: it amplifies teams with context, urgency and suggested actions."
-    },
-    "testimonials": {
-      "title": "Teams already operating at higher pace",
-      "t1": {
-        "name": "Ana Perez",
-        "role": "Head of Support",
-        "quote": "We reduced first-response time and stopped losing threads across channels."
-      },
-      "t2": {
-        "name": "Carlos Rojas",
-        "role": "Sales Manager",
-        "quote": "The commercial team now knows where to focus every hour of the day."
-      }
+    "how": {
+      "section": "HOW IT WORKS",
+      "title": "No code. No consultants. No drama.",
+      "steps": [
+        { "n": "01", "title": "Connect your channels", "desc": "Link WhatsApp Business, Instagram, Telegram and email in under 3 minutes. No code." },
+        { "n": "02", "title": "Train the AI with your brand", "desc": "Upload FAQs, products, and tone. M2 learns to reply the way you would — in seconds." },
+        { "n": "03", "title": "AI replies and triages", "desc": "Handles FAQs, qualifies leads and tags urgency before it hits your team." },
+        { "n": "04", "title": "Seamless human handoff", "desc": "When a human is needed, M2 hands over the conversation with context already summarized." }
+      ]
     },
     "pricing": {
-      "title": "Pricing tailored to your team",
-      "description": "V1 includes guided onboarding and setup adapted to your operation.",
-      "cta": "Contact sales"
+      "section": "PRICING",
+      "title": "Start small. Scale when it hurts.",
+      "mostPopular": "Most popular",
+      "tiers": [
+        {
+          "tier": "Starter",
+          "price": "$19",
+          "per": "/mo",
+          "features": ["2 channels connected", "500 AI replies/mo", "1 user", "Basic templates", "Email support"],
+          "cta": "Start free"
+        },
+        {
+          "tier": "Pro",
+          "price": "$79",
+          "per": "/mo",
+          "featured": true,
+          "features": ["All channels", "5,000 AI replies/mo", "Up to 5 users", "AI trained on your brand", "Human handoff + tags", "Integrations (Shopify, HubSpot)"],
+          "cta": "Start 14-day trial"
+        },
+        {
+          "tier": "Team",
+          "price": "$199",
+          "per": "/mo",
+          "features": ["Unlimited channels", "Unlimited AI replies", "Unlimited users", "Advanced automations", "Analytics & metrics", "Priority support"],
+          "cta": "Talk to sales"
+        }
+      ]
+    },
+    "finalCta": {
+      "titlePre": "Your inbox,",
+      "titleHighlight": "handled.",
+      "subtitle": "14 days free. No card. No painful setup.",
+      "primary": "Start 14-day trial",
+      "secondary": "Talk to sales"
     },
     "footer": {
-      "tagline": "Unified messaging CRM",
-      "contact": "Contact",
-      "home": "Home",
-      "copyright": "Copyright {year} Motomoto"
+      "tagline": "One inbox. Every channel. AI that replies for you.",
+      "rights": "© 2026 M2 · Built with obsession for SMBs.",
+      "online": "online",
+      "product": "Product",
+      "company": "Company",
+      "legal": "Legal",
+      "productLinks": [
+        { "label": "Channels", "href": "#channels" },
+        { "label": "Demo", "href": "#demo" },
+        { "label": "How it works", "href": "#how" },
+        { "label": "Pricing", "href": "#pricing" }
+      ],
+      "companyLinks": [
+        { "label": "Contact", "href": "mailto:contact@motomoto.app" },
+        { "label": "Status", "href": "#" }
+      ],
+      "legalLinks": [
+        { "label": "Privacy", "href": "#" },
+        { "label": "Terms", "href": "#" }
+      ]
     },
-    "contact": {
-      "title": "Let us map your operation",
-      "description": "Email us and we will help design the right flow for your team."
+    "meta": {
+      "title": "M2 — The AI that replies for you, everywhere.",
+      "description": "Unify WhatsApp, Instagram, Telegram and Email into one AI-powered inbox that replies 24/7 in your brand voice."
     }
   }
 }

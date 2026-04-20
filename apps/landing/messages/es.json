@@ -1,80 +1,198 @@
 {
   "landing": {
     "nav": {
-      "login": "Iniciar sesion"
+      "login": "Entrar",
+      "links": [
+        { "label": "Producto", "href": "#channels" },
+        { "label": "Demo", "href": "#demo" },
+        { "label": "Cómo funciona", "href": "#how" },
+        { "label": "Precios", "href": "#pricing" }
+      ]
     },
     "hero": {
-      "badge": "Luminous Executive Stack",
-      "title": "Convierte conversaciones dispersas en ingresos claros",
-      "subtitle": "Motomoto centraliza WhatsApp, Instagram y correo con IA para priorizar oportunidades en segundos.",
-      "primaryCta": "Entrar al admin",
-      "secondaryCta": "Contactar ventas"
+      "kicker": "IA NATIVA · CONTESTA 24/7",
+      "title": "La IA que contesta por ti. En todos lados.",
+      "subtitle": "M2 conecta WhatsApp, Instagram, Telegram y Email en una sola bandeja — y responde a tu nombre con el tono de tu marca, las 24 horas.",
+      "cta1": "Prueba 14 días gratis",
+      "cta2": "Ver producto",
+      "trial14": "14 días gratis",
+      "noCard": "Sin tarjeta",
+      "setup3": "Setup 3 min",
+      "highlightKeywords": ["IA", "Convierte conversaciones", "Deja de perder"]
+    },
+    "chatStage": {
+      "streams": [
+        [
+          { "variant": "wa", "from": "WhatsApp · Laura", "text": "¿Envío a Monterrey?" },
+          { "variant": "m2", "from": "M2 · AI", "text": "Sí, envíos 24-48h. ¿Te comparto opciones?" },
+          { "variant": "wa", "from": "WhatsApp · Diego", "text": "¿Aceptan transferencia?" },
+          { "variant": "m2", "from": "M2 · AI", "text": "Claro, te paso los datos." }
+        ],
+        [
+          { "variant": "ig", "from": "Instagram · @mariana", "text": "¿Talla M?" },
+          { "variant": "m2", "from": "M2 · AI", "text": "Sí, 3 disponibles." },
+          { "variant": "em", "from": "Email · ana@acme", "text": "Propuesta 50u." },
+          { "variant": "m2", "from": "M2 · AI", "text": "Lead caliente → escalado" }
+        ],
+        [
+          { "variant": "tg", "from": "Telegram · Carlos", "text": "Soporte #4521" },
+          { "variant": "m2", "from": "M2 · AI", "text": "Paso con agente humano." },
+          { "variant": "ig", "from": "Instagram · @foodie", "text": "¿Horario hoy?" },
+          { "variant": "m2", "from": "M2 · AI", "text": "Abierto 10-22h." }
+        ]
+      ]
     },
     "channels": {
-      "whatsapp": "WhatsApp",
-      "instagram": "Instagram",
-      "telegram": "Telegram",
-      "email": "Correo"
+      "section": "CANALES",
+      "title": "Cuatro canales. Una bandeja. Cero caos.",
+      "lede": "Conecta una vez. Responde donde sea. La IA adapta el tono, el formato y el momento — nunca suena a bot.",
+      "volumeLabel": "hoy",
+      "sampleLabel": "Mensaje real",
+      "items": [
+        {
+          "key": "whatsapp",
+          "name": "WhatsApp",
+          "volume": "8.2k",
+          "desc": "Respuestas automáticas, plantillas y traspaso humano.",
+          "sample": "Hola, ¿siguen abiertos?"
+        },
+        {
+          "key": "instagram",
+          "name": "Instagram",
+          "volume": "3.4k",
+          "desc": "DMs, comentarios e historias en un mismo lugar.",
+          "sample": "¿Cuánto cuesta el producto?"
+        },
+        {
+          "key": "telegram",
+          "name": "Telegram",
+          "volume": "1.1k",
+          "desc": "Bots y canales atendidos por IA y tu equipo.",
+          "sample": "Quisiera soporte técnico"
+        },
+        {
+          "key": "email",
+          "name": "Email",
+          "volume": "940",
+          "desc": "Bandeja unificada con resumen y respuesta sugerida.",
+          "sample": "Factura del pedido #4521"
+        }
+      ]
     },
-    "features": {
-      "title": "Todo en una sola vista",
-      "f1": {
-        "title": "Bandeja unificada",
-        "description": "Consolida canales y evita perder clientes por contexto fragmentado."
+    "demo": {
+      "section": "DEMO",
+      "title": "Una bandeja. Toda tu mensajería.",
+      "lede": "Así se ve M2 cuando los mensajes llegan de todos lados. Prioridad, borrador de IA y traspaso humano, en una sola vista.",
+      "tabs": { "inbox": "Bandeja", "automations": "Automatizaciones", "analytics": "Analítica" },
+      "sidebar": {
+        "title": "Bandeja",
+        "unread": "sin leer",
+        "allInbox": "Toda la bandeja"
       },
-      "f2": {
-        "title": "Prioridad inteligente",
-        "description": "Detecta conversaciones calientes y sugiere respuestas accionables."
-      },
-      "f3": {
-        "title": "Trazabilidad total",
-        "description": "Cada paso queda visible para equipo, managers y operaciones."
-      },
-      "f4": {
-        "title": "KPIs en tiempo real",
-        "description": "Monitorea conversion, SLA y carga operativa con claridad."
-      },
-      "f5": {
-        "title": "Roles y permisos",
-        "description": "Controla acceso por rol sin complejidad adicional."
-      },
-      "f6": {
-        "title": "Escalable por tenant",
-        "description": "Arquitectura lista para crecer de equipos pequenos a operaciones regionales."
-      }
+      "priority": "Prioridad alta",
+      "aiDraftLabel": "M2 · AI draft",
+      "aiTagLine": "· IA clasificó como \"lead caliente\" · confianza 92% ·",
+      "aiDraft": "¡Hola Laura! Sí, enviamos a Monterrey en 24–48h. El envío es gratis en compras sobre $1,500 MXN. ¿Te comparto el catálogo?",
+      "draftReady": "Borrador listo para enviar — ajusta el tono o envía así.",
+      "edit": "Editar",
+      "send": "Enviar",
+      "aiSummary": "Resumen IA",
+      "priorityScore": "Prioridad",
+      "suggestedActions": "Acciones sugeridas",
+      "newCustomer": "Cliente nuevo",
+      "aiSummaryBody": "Pregunta por envío a Monterrey. Interés medio-alto en chaquetas invierno.",
+      "actions": [
+        "Enviar catálogo otoño/invierno",
+        "Agendar seguimiento en 24h",
+        "Etiquetar como \"MTY · nueva\""
+      ],
+      "channelSummary": [
+        { "key": "all", "label": "Toda la bandeja", "volume": "13.6k" },
+        { "key": "whatsapp", "label": "WhatsApp", "volume": "8.2k" },
+        { "key": "instagram", "label": "Instagram", "volume": "3.4k" },
+        { "key": "telegram", "label": "Telegram", "volume": "1.1k" },
+        { "key": "email", "label": "Email", "volume": "940" }
+      ],
+      "items": [
+        { "name": "Laura G.", "channel": "whatsapp", "preview": "¿Envío a Monterrey?", "time": "2m", "initials": "LG" },
+        { "name": "@mariana.d", "channel": "instagram", "preview": "¿Tienes la talla M?", "time": "5m", "initials": "M" },
+        { "name": "Carlos R.", "channel": "telegram", "preview": "Soporte pedido #4521", "time": "12m", "initials": "CR" },
+        { "name": "ana@acme.co", "channel": "email", "preview": "Propuesta 50 unidades", "time": "1h", "initials": "A" },
+        { "name": "Jorge L.", "channel": "whatsapp", "preview": "Cotizar 10 unidades", "time": "2h", "initials": "JL" },
+        { "name": "@foodielover", "channel": "instagram", "preview": "¿Horario hoy?", "time": "3h", "initials": "F" }
+      ]
     },
-    "ai": {
-      "eyebrow": "IA contextual",
-      "title": "Sugiere, resume y clasifica en el flujo de trabajo",
-      "description": "La IA de Motomoto no interrumpe: amplifica al equipo con contexto, urgencia y acciones sugeridas."
-    },
-    "testimonials": {
-      "title": "Equipos que ya operan con ritmo",
-      "t1": {
-        "name": "Ana Perez",
-        "role": "Head of Support",
-        "quote": "Reducimos los tiempos de primera respuesta y dejamos de perder hilos entre canales."
-      },
-      "t2": {
-        "name": "Carlos Rojas",
-        "role": "Sales Manager",
-        "quote": "El equipo comercial ahora sabe donde enfocarse cada hora del dia."
-      }
+    "how": {
+      "section": "CÓMO FUNCIONA",
+      "title": "Sin código. Sin consultores. Sin drama.",
+      "steps": [
+        { "n": "01", "title": "Conecta tus canales", "desc": "Vincula WhatsApp Business, Instagram, Telegram y tu correo en menos de 3 minutos. Sin código." },
+        { "n": "02", "title": "Entrena a la IA con tu marca", "desc": "Sube FAQs, productos y tono. M2 aprende a responder como tú lo harías — en segundos." },
+        { "n": "03", "title": "IA responde y prioriza", "desc": "Contesta consultas frecuentes, califica leads y etiqueta urgencia antes de que llegue a tu equipo." },
+        { "n": "04", "title": "Traspaso humano sin fricción", "desc": "Cuando hace falta un humano, M2 pasa la conversación con todo el contexto ya resumido." }
+      ]
     },
     "pricing": {
-      "title": "Pricing a tu medida",
-      "description": "V1 incluye onboarding guiado y configuracion adaptada a tu operacion.",
-      "cta": "Contactar ventas"
+      "section": "PRECIOS",
+      "title": "Empieza pequeño. Escala cuando duela.",
+      "mostPopular": "Más popular",
+      "tiers": [
+        {
+          "tier": "Starter",
+          "price": "$19",
+          "per": "/mes",
+          "features": ["2 canales conectados", "500 conversaciones IA/mes", "1 usuario", "Plantillas básicas", "Soporte por email"],
+          "cta": "Empezar gratis"
+        },
+        {
+          "tier": "Pro",
+          "price": "$79",
+          "per": "/mes",
+          "featured": true,
+          "features": ["Todos los canales", "5,000 conversaciones IA/mes", "Hasta 5 usuarios", "IA entrenada en tu marca", "Traspaso humano + etiquetas", "Integraciones (Shopify, HubSpot)"],
+          "cta": "Probar 14 días"
+        },
+        {
+          "tier": "Team",
+          "price": "$199",
+          "per": "/mes",
+          "features": ["Canales ilimitados", "Conversaciones IA ilimitadas", "Usuarios ilimitados", "Automatizaciones avanzadas", "Analytics y métricas", "Soporte prioritario"],
+          "cta": "Hablar con ventas"
+        }
+      ]
+    },
+    "finalCta": {
+      "titlePre": "Tu bandeja,",
+      "titleHighlight": "atendida.",
+      "subtitle": "14 días gratis. Sin tarjeta. Sin setup complicado.",
+      "primary": "Prueba 14 días gratis",
+      "secondary": "Hablar con ventas"
     },
     "footer": {
-      "tagline": "CRM de mensajeria unificada",
-      "contact": "Contacto",
-      "home": "Inicio",
-      "copyright": "Copyright {year} Motomoto"
+      "tagline": "Una bandeja. Todos los canales. IA que contesta por ti.",
+      "rights": "© 2026 M2 · Hecho con obsesión por PyMEs.",
+      "online": "online",
+      "product": "Producto",
+      "company": "Compañía",
+      "legal": "Legal",
+      "productLinks": [
+        { "label": "Canales", "href": "#channels" },
+        { "label": "Demo", "href": "#demo" },
+        { "label": "Cómo funciona", "href": "#how" },
+        { "label": "Precios", "href": "#pricing" }
+      ],
+      "companyLinks": [
+        { "label": "Contacto", "href": "mailto:contact@motomoto.app" },
+        { "label": "Status", "href": "#" }
+      ],
+      "legalLinks": [
+        { "label": "Privacidad", "href": "#" },
+        { "label": "Términos", "href": "#" }
+      ]
     },
-    "contact": {
-      "title": "Hablemos de tu operacion",
-      "description": "Escribenos y te ayudamos a mapear el flujo ideal para tu equipo."
+    "meta": {
+      "title": "M2 — La IA que contesta por ti, en todos lados.",
+      "description": "Unifica WhatsApp, Instagram, Telegram y Email en una sola bandeja con IA que responde 24/7 en tu tono de marca."
     }
   }
 }

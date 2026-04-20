@@ -1,94 +1,120 @@
 "use client";
 
-import { auth, createBrowserTokenStore } from "@m2/api-client";
-import { useRouter, useSearchParams, usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
-import { z } from "zod";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+import { useState } from "react";
 
-import { Button, Input } from "@m2/ui";
-
-import { useAuth } from "../../../../src/hooks/use-auth";
-
-const loginSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(8),
-});
+import { AppIcon } from "../../../../src/components/m2/AppIcon";
+import { AuthVisual } from "../../../../src/components/m2/AuthVisual";
+import { SocialAuthButtons } from "../../../../src/components/m2/SocialAuthButtons";
 
 export default function LoginPage() {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const pathname = usePathname();
-  const locale = pathname?.startsWith("/en") ? "en" : "es";
+  const pathname = usePathname() ?? "";
+  const locale = pathname.startsWith("/en") ? "en" : "es";
+  const base = locale === "es" ? "/admin" : "/en/admin";
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [fieldError, setFieldError] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const authState = useAuth();
-
-  const redirect = searchParams?.get("redirect") || `/${locale === "es" ? "" : "en/"}admin`;
-
-  useEffect(() => {
-    if (authState.user) {
-      router.replace(redirect);
-    }
-  }, [authState.user, redirect, router]);
-
-  async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setFieldError(null);
-
-    const parsed = loginSchema.safeParse({ email, password });
-    if (!parsed.success) {
-      setFieldError(locale === "es" ? "Credenciales invalidas" : "Invalid credentials");
-      return;
-    }
-
-    setIsLoading(true);
-    try {
-      const result = await auth.login(parsed.data);
-      const tokenStore = createBrowserTokenStore();
-      tokenStore.set({ accessToken: result.accessToken, refreshToken: result.refreshToken });
-      router.replace(redirect);
-    } catch {
-      setFieldError(locale === "es" ? "Credenciales invalidas" : "Invalid credentials");
-    } finally {
-      setIsLoading(false);
-    }
-  }
+  const [showPw, setShowPw] = useState(false);
 
   return (
-    <section className="mx-auto mt-20 w-full max-w-md rounded-2xl border border-stroke-subtle bg-surface-container/70 p-6 shadow-glow-secondary">
-      <h1 className="mb-1 font-display text-3xl font-extrabold text-text-primary">
-        {locale === "es" ? "Iniciar sesion" : "Log in"}
-      </h1>
-      <p className="mb-6 text-sm text-text-secondary">
-        {locale === "es" ? "Accede a tu panel" : "Access your workspace"}
-      </p>
+    <div className="m2-app auth">
+      <div className="auth-form-col">
+        <Link href={`${base}/dashboard`} className="auth-logo">
+          <span className="mark">m</span>M2
+        </Link>
+        <div className="auth-form-wrap">
+          <div className="auth-form">
+            <div>
+              <h1>Bienvenido de vuelta</h1>
+              <div className="sub" style={{ marginTop: 10 }}>
+                Entra a tu bandeja unificada.
+              </div>
+            </div>
 
-      <form className="space-y-4" onSubmit={onSubmit}>
-        <Input
-          disabled={isLoading}
-          error={fieldError || undefined}
-          label={locale === "es" ? "Correo" : "Email"}
-          type="email"
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
-        />
-        <Input
-          disabled={isLoading}
-          label={locale === "es" ? "Clave" : "Password"}
-          type="password"
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
-        />
+            <SocialAuthButtons />
 
-        {fieldError ? <p className="text-sm text-semantic-danger">{fieldError}</p> : null}
+            <div className="divider">o con tu email</div>
 
-        <Button className="w-full" isLoading={isLoading} type="submit">
-          {locale === "es" ? "Entrar" : "Sign in"}
-        </Button>
-      </form>
-    </section>
+            <div className="input-group">
+              <label className="label">Email</label>
+              <div className="input-icon">
+                <AppIcon name="mail" size={16} />
+                <input className="input" type="email" placeholder="tu@empresa.com" defaultValue="andrea@milacafe.mx" />
+              </div>
+            </div>
+
+            <div className="input-group">
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <label className="label">Contraseña</label>
+                <Link
+                  href={`${base}/recover`}
+                  style={{
+                    fontSize: 11.5,
+                    color: "var(--accent-soft)",
+                    textDecoration: "none",
+                    fontFamily: "var(--font-mono)",
+                    letterSpacing: ".04em",
+                    textTransform: "uppercase",
+                  }}
+                >
+                  ¿Olvidaste?
+                </Link>
+              </div>
+              <div className="input-icon" style={{ position: "relative" }}>
+                <AppIcon name="lock" size={16} />
+                <input className="input" type={showPw ? "text" : "password"} placeholder="••••••••••" defaultValue="supersecret" />
+                <button
+                  type="button"
+                  onClick={() => setShowPw(!showPw)}
+                  style={{
+                    position: "absolute",
+                    right: 8,
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    background: "transparent",
+                    border: "none",
+                    color: "var(--text-dim)",
+                    cursor: "pointer",
+                    padding: 6,
+                  }}
+                  aria-label="Mostrar contraseña"
+                >
+                  <AppIcon name="eye" size={16} />
+                </button>
+              </div>
+            </div>
+
+            <label className="checkbox">
+              <input type="checkbox" defaultChecked />
+              <span className="box" />
+              <span style={{ fontSize: 13, color: "var(--text-muted)" }}>Mantener sesión iniciada</span>
+            </label>
+
+            <button type="button" className="btn btn-primary" onClick={() => router.push(`${base}/2fa`)}>
+              Entrar <AppIcon name="arrow-right" size={14} />
+            </button>
+
+            <div className="link-row">
+              ¿No tienes cuenta? <Link href={`${base}/register`}>Regístrate gratis</Link>
+            </div>
+          </div>
+        </div>
+
+        <div
+          style={{
+            fontSize: 11.5,
+            color: "var(--text-dim)",
+            fontFamily: "var(--font-mono)",
+            textTransform: "uppercase",
+            letterSpacing: ".06em",
+            marginTop: "auto",
+          }}
+        >
+          © 2026 M2 · Todas las conversaciones, una bandeja
+        </div>
+      </div>
+
+      <AuthVisual variant="login" />
+    </div>
   );
 }

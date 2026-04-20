@@ -10,15 +10,7 @@ import { clearSessionSentinel } from "./session-cookie";
 import type { TokenStore } from "./token-store";
 import { unwrap, type Envelope } from "./unwrap";
 
-const publicEnv = globalThis as {
-  process?: {
-    env?: {
-      NEXT_PUBLIC_API_URL?: string;
-    };
-  };
-};
-
-const baseUrl = publicEnv.process?.env?.NEXT_PUBLIC_API_URL;
+const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
 if (!baseUrl) {
   throw new Error("NEXT_PUBLIC_API_URL missing");
@@ -70,7 +62,7 @@ function handleAuthFailure() {
   tokenStore?.clear();
   clearSessionSentinel();
 
-  if (typeof window !== "undefined") {
+  if (typeof window !== "undefined" && !window.location.pathname.includes("/admin/login")) {
     window.location.assign("/admin/login?reason=expired");
   }
 }

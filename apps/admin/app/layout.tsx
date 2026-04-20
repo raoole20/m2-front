@@ -1,4 +1,5 @@
 import "./globals.css";
+import "./m2.css";
 
 import type { ReactNode } from "react";
 
