@@ -11,15 +11,19 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@m2/api-client": "workspace:*",
     "@m2/config": "workspace:*",
     "@m2/design": "workspace:*",
     "@m2/i18n": "workspace:*",
     "@m2/ui": "workspace:*",
+    "@tanstack/react-query": "^5.90.2",
     "lucide-react": "^0.511.0",
     "next": "15.3.3",
     "next-intl": "^4.4.0",
     "react": "19.2.0",
-    "react-dom": "19.2.0"
+    "react-dom": "19.2.0",
+    "zod": "^4.1.12",
+    "zustand": "^5.0.12"
   },
   "devDependencies": {
     "@types/node": "^22.13.9",

@@ -2,7 +2,7 @@ import { darkColors } from './colors';
 
 /**
  * Flat color scales tailored for Tailwind consumption by the web apps
- * (apps/landing, apps/admin) and @m2/ui primitives.
+ * (apps/landing) and @m2/ui primitives.
  *
  * Derived from the single source of truth in ./colors (M3 dark palette)
  * so that web styles never drift from mobile. Do NOT import this from

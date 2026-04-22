@@ -8,8 +8,7 @@ Monorepo for the Motomoto mobile CRM and unified messaging platform. Manages cus
 m2-front/
 ├── apps/
 │   ├── mobile/          — @m2/mobile     : Expo SDK 55 + React Native 0.83
-│   ├── landing/         — @m2/landing    : Next.js 15 marketing site
-│   └── admin/           — @m2/admin      : Next.js 15 admin dashboard
+│   └── landing/         — @m2/landing    : Next.js 15 marketing + admin (/admin)
 ├── packages/
 │   ├── types/           — @m2/types      : shared TypeScript interfaces
 │   ├── design/          — @m2/design     : design tokens + Tailwind preset
@@ -26,8 +25,7 @@ m2-front/
 | Package | Description |
 |---|---|
 | `@m2/mobile` | Expo/React Native app — the phone client |
-| `@m2/landing` | Public marketing site (Next.js, SSG, i18n es/en) |
-| `@m2/admin` | Auth-gated admin dashboard (Next.js, JWT via `@m2/api-client`) |
+| `@m2/landing` | Next.js 15: public marketing at `/` and auth-gated admin at `/admin` (JWT via `@m2/api-client`) |
 | `@m2/types` | Pure TypeScript interfaces consumed by mobile + web apps |
 | `@m2/design` | Design tokens (colors, spacing, typography, radii, glows) + Tailwind preset |
 | `@m2/ui` | Glassmorphism + gradient React components for web |
@@ -96,42 +94,35 @@ pnpm mobile start                    # start Metro for mobile
 pnpm mobile android                  # open Android dev client
 pnpm mobile ios                      # open iOS simulator
 
-# Web apps
-pnpm dev:landing                     # Landing at http://localhost:3001
-pnpm dev:admin                       # Admin at http://localhost:3002
-pnpm build:web                       # Build both landing + admin
+# Web app
+pnpm dev:landing                     # Next.js at http://localhost:3001 (marketing + /admin)
+pnpm dev:admin                       # Alias → same as dev:landing
+pnpm build:web                       # Build @m2/landing
 pnpm --filter @m2/api-client generate:api   # codegen when backend is running
 ```
 
-## Web Apps
+## Web app (`@m2/landing`)
 
-| App | Local URL | Deploy target | Role |
+| Area | Local URL | Deploy target | Role |
 |---|---|---|---|
-| Landing (`@m2/landing`) | `http://localhost:3001` | `motomoto.app` | Public marketing + signup CTA |
-| Admin (`@m2/admin`) | `http://localhost:3002` | `app.motomoto.app` | JWT-gated dashboard / inbox / profile |
+| Marketing | `http://localhost:3001` / `http://localhost:3001/en` | `motomoto.app` | Public site + CTAs |
+| Admin | `http://localhost:3001/admin/login`, `/en/admin/login` | Same host (e.g. `motomoto.app/admin`) | JWT-gated dashboard / inbox / settings |
 
 ### Environment variables
 
-Copy each app's `.env.example` to `.env.local` and fill the values.
+Copy `apps/landing/.env.example` to `apps/landing/.env.local` and fill the values.
 
 **Landing** (`apps/landing/.env.local`):
-- `NEXT_PUBLIC_API_URL` — e.g. `http://localhost:3000`
-- `NEXT_PUBLIC_SITE_URL` — e.g. `http://localhost:3001`
-- `NEXT_PUBLIC_ADMIN_URL` — e.g. `http://localhost:3002`
+- `NEXT_PUBLIC_API_URL` — e.g. `http://localhost:3000/api`
+- `NEXT_PUBLIC_SITE_URL` — canonical site URL, e.g. `http://localhost:3001`
 - `NEXT_PUBLIC_DEFAULT_LOCALE` — `es` (default) or `en`
-
-**Admin** (`apps/admin/.env.local`):
-- `NEXT_PUBLIC_API_URL`
-- `NEXT_PUBLIC_SITE_URL`
-- `NEXT_PUBLIC_LANDING_URL`
-- `NEXT_PUBLIC_DEFAULT_LOCALE`
 
 ### Backend CORS (local)
 
-`m2-back` must allow both web origins. In its `.env`:
+`m2-back` must allow the web app origin. In its `.env`:
 
 ```env
-CORS_ORIGIN=http://localhost:3001,http://localhost:3002
+CORS_ORIGIN=http://localhost:3001
 ```
 
 ### Smoke test (manual)
@@ -146,15 +137,13 @@ CORS_ORIGIN=http://localhost:3001,http://localhost:3002
 
 ### Vercel deploy
 
-- **Landing project**: Root `apps/landing`, build `pnpm turbo run build --filter=@m2/landing...`
-- **Admin project**: Root `apps/admin`, build `pnpm turbo run build --filter=@m2/admin...`
-- Both projects import the same monorepo (`raoole20/m2-front`).
+- **Web project**: Root directory `apps/landing`, build `pnpm turbo run build --filter=@m2/landing...` (see [`apps/landing/vercel.json`](apps/landing/vercel.json)).
 
 ### Production DNS
 
-- `motomoto.app` → Vercel landing
+- `motomoto.app` → Vercel web app (`apps/landing`)
 - `www.motomoto.app` → 308 redirect to `motomoto.app`
-- `app.motomoto.app` → Vercel admin
+- If you previously used `app.motomoto.app` for a separate admin deployment, point it with a 301 redirect to `https://motomoto.app/admin` (or equivalent) so bookmarks keep working.
 
 ## Path Aliases
 

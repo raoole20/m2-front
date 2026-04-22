@@ -194,5 +194,11 @@
       "title": "M2 — La IA que contesta por ti, en todos lados.",
       "description": "Unifica WhatsApp, Instagram, Telegram y Email en una sola bandeja con IA que responde 24/7 en tu tono de marca."
     }
+  },
+  "admin": {
+    "login": {
+      "title": "Iniciar sesion",
+      "subtitle": "Accede a tu panel"
+    }
   }
 }

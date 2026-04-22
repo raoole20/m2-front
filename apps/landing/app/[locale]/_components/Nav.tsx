@@ -8,9 +8,12 @@ type NavProps = {
   locale: Lang;
 };
 
+function adminLoginHref(locale: Lang): string {
+  return locale === "es" ? "/admin/login" : "/en/admin/login";
+}
+
 export async function Nav({ locale }: NavProps) {
   const t = await getTranslations("landing.nav");
-  const adminBase = process.env.NEXT_PUBLIC_ADMIN_URL || "http://localhost:3002";
   const links = t.raw("links") as NavLink[];
   const otherLocale = locale === "es" ? "en" : "es";
   const otherHref = otherLocale === "es" ? "/" : "/en";
@@ -32,10 +35,10 @@ export async function Nav({ locale }: NavProps) {
           <Link className="nav-lang" href={otherHref}>
             {otherLocale.toUpperCase()}
           </Link>
-          <a className="btn btn-primary" href={`${adminBase}/${locale === "es" ? "" : "en/"}admin/login`}>
+          <Link className="btn btn-primary" href={adminLoginHref(locale)}>
             {t("login")}
             <ArrowRight size={14} />
-          </a>
+          </Link>
         </div>
       </div>
     </header>

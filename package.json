@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "turbo run dev",
     "build": "turbo run build",
-    "build:web": "turbo run build --filter=@m2/landing --filter=@m2/admin",
+    "build:web": "turbo run build --filter=@m2/landing",
     "typecheck": "turbo run typecheck",
     "lint": "turbo run lint",
     "format": "prettier --write .",
@@ -14,7 +14,7 @@
     "mobile": "pnpm --filter @m2/mobile",
     "mobile:start": "pnpm --filter @m2/mobile start",
     "dev:landing": "pnpm --filter @m2/landing dev",
-    "dev:admin": "pnpm --filter @m2/admin dev"
+    "dev:admin": "pnpm --filter @m2/landing dev"
   },
   "devDependencies": {
     "turbo": "^2.3.0",

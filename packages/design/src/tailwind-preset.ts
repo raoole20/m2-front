@@ -5,7 +5,7 @@ import { tailwindColors } from './tailwindColors';
 /**
  * Tailwind v3 preset for web apps.
  *
- * Consumed by apps/landing + apps/admin via tailwind.config.ts `presets`.
+ * Consumed by apps/landing via tailwind.config.ts `presets`.
  * Mobile does NOT consume this preset (RN has no Tailwind).
  */
 export const tailwindPreset = {

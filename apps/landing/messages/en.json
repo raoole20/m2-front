@@ -194,5 +194,11 @@
       "title": "M2 — The AI that replies for you, everywhere.",
       "description": "Unify WhatsApp, Instagram, Telegram and Email into one AI-powered inbox that replies 24/7 in your brand voice."
     }
+  },
+  "admin": {
+    "login": {
+      "title": "Log in",
+      "subtitle": "Access your workspace"
+    }
   }
 }

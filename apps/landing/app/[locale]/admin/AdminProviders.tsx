@@ -15,6 +15,10 @@ function isAuthRoute(pathname: string): boolean {
   return AUTH_ROUTES.some((route) => pathname.includes(`/admin${route}`));
 }
 
+function adminLoginPath(locale: "es" | "en"): string {
+  return locale === "es" ? "/admin/login" : "/en/admin/login";
+}
+
 function AuthGuard({ children }: { children: ReactNode }) {
   const router = useRouter();
   const pathname = usePathname() ?? "";
@@ -27,14 +31,14 @@ function AuthGuard({ children }: { children: ReactNode }) {
 
     const token = tokenStore.getAccess();
     if (!token && !authState.isLoading) {
-      router.replace(`/${locale === "es" ? "" : "en/"}admin/login`);
+      router.replace(adminLoginPath(locale));
     }
   }, [authState.isLoading, locale, pathname, router, tokenStore]);
 
   return <>{children}</>;
 }
 
-export default function AdminLayout({ children }: { children: ReactNode }) {
+export function AdminProviders({ children }: { children: ReactNode }) {
   const queryClient = useMemo(() => createQueryClient(), []);
 
   return (
