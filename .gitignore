@@ -66,3 +66,4 @@ out/
 
 # build artifacts
 coverage/
+.pnpm-store/
