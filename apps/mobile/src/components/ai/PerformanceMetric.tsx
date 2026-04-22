@@ -48,10 +48,11 @@ const createStyles = (colors: ThemeColors, tint?: string) =>
       borderRadius: borderRadius.sm,
     },
     value: {
-      fontFamily: fontFamily.displayBold,
+      fontFamily: fontFamily.displaySemiBold,
       fontSize: 24,
       lineHeight: 32,
-      fontWeight: '700',
+      fontWeight: '600',
+      letterSpacing: -0.02 * 24,
       color: tint ?? colors.onSurface,
       marginBottom: spacing[1],
     },

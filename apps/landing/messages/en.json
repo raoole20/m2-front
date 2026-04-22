@@ -1,8 +1,8 @@
 {
   "landing": {
     "nav": {
-      "login": "Log in",
-      "cta": "Get started",
+      "login": "Login",
+      "cta": "Sign up",
       "links": [
         { "label": "Product", "href": "#channels" },
         { "label": "Demo", "href": "#demo" },
@@ -48,7 +48,6 @@
       ]
     },
     "logos": {
-      "label": "Teams replying with M2",
       "items": [
         { "text": "Luna Boutique", "sans": false },
         { "text": "NÓMADA", "sans": true },

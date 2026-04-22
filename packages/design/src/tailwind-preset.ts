@@ -36,8 +36,9 @@ export const tailwindPreset = {
       },
       borderRadius: radii,
       fontFamily: {
-        display: ['Manrope', 'Segoe UI', 'sans-serif'],
+        display: ['Inter', 'Segoe UI', 'sans-serif'],
         body: ['Inter', 'Segoe UI', 'sans-serif'],
+        serif: ['"Instrument Serif"', 'Georgia', 'serif'],
       },
       boxShadow: {
         'glow-primary': `${glows.primary.soft}, ${glows.primary.strong}`,

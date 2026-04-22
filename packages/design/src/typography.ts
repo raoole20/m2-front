@@ -1,22 +1,26 @@
 import { Platform } from 'react-native';
 
 /**
- * Font families — loaded via @expo-google-fonts.
+ * Font families — loaded via @expo-google-fonts (mobile) and next/font/google (landing).
  *
- * Display & Headline use Manrope; Body & Label use Inter.
- * System fallbacks are used while custom fonts load.
+ * Single primary family: Inter. Display/Headline/Title/Body/Label all use Inter weights.
+ * Instrument Serif italic is a web-only accent for <em> highlights; declared here for
+ * token parity but not loaded on mobile.
  */
 export const fontFamily = {
-  // Display & Headline (Manrope)
-  displayRegular: 'Manrope_400Regular',
-  displayMedium: 'Manrope_500Medium',
-  displaySemiBold: 'Manrope_600SemiBold',
-  displayBold: 'Manrope_700Bold',
-  displayExtraBold: 'Manrope_800ExtraBold',
   // Body & Label (Inter)
   bodyRegular: 'Inter_400Regular',
   bodyMedium: 'Inter_500Medium',
   bodySemiBold: 'Inter_600SemiBold',
+  // Display & Headline aliases — all point to Inter weights.
+  // Inter is loaded in 400/500/600 only; 700/800 aliases fall back to 600.
+  displayRegular: 'Inter_400Regular',
+  displayMedium: 'Inter_500Medium',
+  displaySemiBold: 'Inter_600SemiBold',
+  displayBold: 'Inter_600SemiBold',
+  displayExtraBold: 'Inter_600SemiBold',
+  // Web-only accent (declared for token parity; not loaded on mobile).
+  accentSerif: 'InstrumentSerif_400Regular_Italic',
   // System fallbacks (used while fonts load)
   systemRegular: Platform.OS === 'android' ? 'Roboto' : undefined,
   systemMedium: Platform.OS === 'android' ? 'Roboto_medium' : undefined,
@@ -42,36 +46,37 @@ export function resolvedFont(
 /**
  * Material 3 typography scale + legacy iOS HIG aliases.
  *
- * M3 entries do NOT include `fontFamily` — components apply fontFamily separately
+ * Weights target Inter 400/500/600 — matching the landing hero pattern
+ * (Inter 500 with tight letter-spacing). Components apply fontFamily separately
  * via the `fontFamily` export and `resolvedFont` utility.
  */
 export const typography = {
-  // ─── Display scale (Manrope) ───────────────────────────────
+  // ─── Display scale (Inter) ────────────────────────────────
   displayLarge: {
     fontSize: 56,
     lineHeight: 64,
-    fontWeight: '800' as const,
-    letterSpacing: -0.02 * 56, // -1.12
+    fontWeight: '600' as const,
+    letterSpacing: -0.035 * 56,
   },
   displayMedium: {
     fontSize: 45,
     lineHeight: 52,
-    fontWeight: '700' as const,
-    letterSpacing: -0.02 * 45,
+    fontWeight: '500' as const,
+    letterSpacing: -0.03 * 45,
   },
   displaySmall: {
     fontSize: 36,
     lineHeight: 44,
-    fontWeight: '700' as const,
-    letterSpacing: -0.02 * 36,
+    fontWeight: '500' as const,
+    letterSpacing: -0.028 * 36,
   },
 
-  // ─── Headline scale (Manrope) ─────────────────────────────
+  // ─── Headline scale (Inter) ───────────────────────────────
   headlineLarge: {
     fontSize: 32,
     lineHeight: 40,
-    fontWeight: '700' as const,
-    letterSpacing: -0.02 * 32,
+    fontWeight: '500' as const,
+    letterSpacing: -0.025 * 32,
   },
   headlineMedium: {
     fontSize: 28,
@@ -86,12 +91,12 @@ export const typography = {
     letterSpacing: -0.02 * 24,
   },
 
-  // ─── Title scale (Manrope) ────────────────────────────────
+  // ─── Title scale (Inter) ──────────────────────────────────
   titleLarge: {
     fontSize: 22,
     lineHeight: 28,
     fontWeight: '600' as const,
-    letterSpacing: -0.02 * 22,
+    letterSpacing: -0.015 * 22,
   },
   titleMedium: {
     fontSize: 16,

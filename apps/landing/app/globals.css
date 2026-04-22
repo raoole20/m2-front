@@ -185,7 +185,10 @@ html {
   --radius: var(--b3-radius);
   --radius-lg: var(--b3-radius-lg);
 
-  background: var(--bg);
+  background:
+    radial-gradient(1100px 640px at 84% 0%, rgba(139, 140, 247, 0.16), transparent 60%),
+    radial-gradient(900px 600px at 88% -120px, rgba(139, 140, 247, 0.1), transparent 65%),
+    var(--bg);
   color: var(--ink-hi);
   font-family: var(--font-sans);
   min-height: 100%;
@@ -205,18 +208,29 @@ html {
 }
 
 /* ============ Nav ============ */
-.prop-b3 .nav {
-  position: sticky;
-  top: 0;
+.prop-b3 .nav-root {
+  position: fixed;
   z-index: 50;
-  backdrop-filter: blur(18px) saturate(160%);
-  background: color-mix(in oklab, var(--bg) 78%, transparent);
-  border-bottom: 1px solid var(--border);
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
 }
-.prop-b3 .nav-inner {
+.prop-b3 .nav-shell {
+  pointer-events: auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  border: 1px solid transparent;
+  max-width: 1200px;
+  width: 100%;
+  box-sizing: border-box;
+  will-change: transform, width, padding, border-radius, background-color, backdrop-filter;
+}
+.prop-b3 .nav-root[data-scrolled="true"] .nav-shell {
+  width: auto;
+  max-width: calc(100vw - 32px);
+}
+.prop-b3 .nav-spacer {
   height: 68px;
 }
 .prop-b3 .logo {
@@ -283,6 +297,17 @@ html {
 }
 @media (max-width: 780px) {
   .prop-b3 .nav-links {
+    display: none;
+  }
+  .prop-b3 .nav-shell {
+    max-width: calc(100vw - 24px);
+  }
+  .prop-b3 .nav-shell[data-state="top"] {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  .prop-b3 .nav-shell[data-state="scrolled"] .nav-lang,
+  .prop-b3 .nav-shell[data-state="scrolled"] .nav-login {
     display: none;
   }
 }
@@ -395,9 +420,7 @@ html {
   content: "";
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(900px 500px at 82% -5%, rgba(139, 140, 247, 0.18), transparent 55%),
-    radial-gradient(700px 500px at 2% 35%, rgba(139, 140, 247, 0.07), transparent 60%);
+  background: radial-gradient(700px 500px at 2% 35%, rgba(139, 140, 247, 0.07), transparent 60%);
   pointer-events: none;
 }
 .prop-b3 .hero::after {
@@ -480,7 +503,9 @@ html {
   color: #f5f3ff;
 }
 .prop-b3 h1 em {
-  font-style: normal;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
   background: linear-gradient(120deg, #c4b5fd 0%, #a78bfa 30%, #8b5cf6 70%, #f59e0b 110%);
   background-size: 200% 100%;
   -webkit-background-clip: text;
@@ -980,52 +1005,51 @@ html {
 
 /* ============ Logos bar ============ */
 .prop-b3 .logos {
-  margin-top: 80px;
-  padding: 48px 0 40px;
+  margin-top: 40px;
+  padding: 20px 0;
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
   background: rgba(255, 255, 255, 0.01);
 }
-.prop-b3 .logos-label {
-  text-align: center;
-  font-size: 12px;
-  color: var(--ink-lo);
-  margin-bottom: 24px;
-  font-weight: 500;
-  letter-spacing: 0.02em;
+.prop-b3 .logos-track {
+  width: 100%;
+  mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 96px,
+    #000 calc(100% - 96px),
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 96px,
+    #000 calc(100% - 96px),
+    transparent 100%
+  );
 }
-.prop-b3 .logos-grid {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 40px;
-  align-items: center;
-}
-.prop-b3 .logos-grid .lg {
+.prop-b3 .logos .lg {
+  flex: none;
+  margin-right: 64px;
   font-size: 18px;
   font-weight: 700;
   letter-spacing: -0.02em;
   color: var(--ink-lo);
-  text-align: center;
   opacity: 0.65;
   transition: opacity 0.2s, color 0.2s;
   font-family: var(--font-serif);
   font-style: italic;
+  white-space: nowrap;
 }
-.prop-b3 .logos-grid .lg.sans {
+.prop-b3 .logos .lg.sans {
   font-family: inherit;
   font-style: normal;
   font-weight: 600;
   letter-spacing: 0.02em;
 }
-.prop-b3 .logos-grid .lg:hover {
+.prop-b3 .logos .lg:hover {
   opacity: 1;
   color: var(--ink-hi);
-}
-@media (max-width: 860px) {
-  .prop-b3 .logos-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 28px;
-  }
 }
 
 /* ============ Sections ============ */
@@ -1067,7 +1091,7 @@ html {
 .prop-b3 .section-head h2 {
   font-size: clamp(32px, 4vw, 52px);
   font-weight: 500;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.028em;
   line-height: 1.05;
   margin: 14px 0 0;
   color: var(--ink-hi);
@@ -1080,7 +1104,7 @@ html {
 }
 .prop-b3 .section-head p {
   color: var(--ink-mid);
-  font-size: 17px;
+  font-size: 16px;
   line-height: 1.55;
   margin: 18px 0 0;
 }
@@ -1258,12 +1282,13 @@ html {
   margin: 0 0 6px;
   font-size: 16px;
   font-weight: 600;
+  letter-spacing: -0.01em;
   color: var(--ink-hi);
 }
 .prop-b3 .channel-card p {
   margin: 0;
   color: var(--ink-mid);
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.55;
 }
 .prop-b3 .channel-card .mini-chat {
@@ -1702,13 +1727,14 @@ html {
 }
 .prop-b3 .step h3 {
   margin: 0 0 8px;
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 600;
+  letter-spacing: -0.01em;
   color: var(--ink-hi);
 }
 .prop-b3 .step p {
   margin: 0;
-  font-size: 13.5px;
+  font-size: 14px;
   color: var(--ink-mid);
   line-height: 1.55;
 }
@@ -1824,7 +1850,8 @@ html {
 }
 .prop-b3 .cta-block p {
   color: var(--ink-mid);
-  font-size: 17px;
+  font-size: 16px;
+  line-height: 1.55;
   margin: 0 auto 32px;
   max-width: 52ch;
 }

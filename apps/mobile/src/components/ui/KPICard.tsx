@@ -120,8 +120,9 @@ const createStyles = (colors: ThemeColors, tint: string) =>
     value: {
       fontSize: 32,
       lineHeight: 38,
-      fontWeight: '800',
-      fontFamily: fontFamily.displayExtraBold,
+      fontWeight: '600',
+      fontFamily: fontFamily.displaySemiBold,
+      letterSpacing: -0.028 * 32,
       color: tint,
       marginBottom: spacing[1], // 4
     },

@@ -1,8 +1,8 @@
 {
   "landing": {
     "nav": {
-      "login": "Entrar",
-      "cta": "Empezar gratis",
+      "login": "Login",
+      "cta": "Sign up",
       "links": [
         { "label": "Producto", "href": "#channels" },
         { "label": "Demo", "href": "#demo" },
@@ -48,7 +48,6 @@
       ]
     },
     "logos": {
-      "label": "Equipos que responden con M2",
       "items": [
         { "text": "Luna Boutique", "sans": false },
         { "text": "NÓMADA", "sans": true },
