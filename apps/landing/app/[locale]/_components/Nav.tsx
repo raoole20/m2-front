@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 
 import type { Lang, NavLink } from "../../../lib/content";
+import { Logo } from "./Logo";
 
 type NavProps = {
   locale: Lang;
@@ -21,8 +22,8 @@ export async function Nav({ locale }: NavProps) {
   return (
     <header className="nav">
       <div className="container nav-inner">
-        <Link className="logo" href={locale === "es" ? "/" : "/en"}>
-          <span className="mark">m</span>M2
+        <Link className="logo" aria-label="M2" href={locale === "es" ? "/" : "/en"}>
+          <Logo height={28} />
         </Link>
         <nav className="nav-links">
           {links.map((link) => (

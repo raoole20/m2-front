@@ -12,11 +12,11 @@
     },
     "hero": {
       "kicker": "Nueva plataforma · Beta abierta",
-      "title": "Responde cada mensaje.\nSin contratar más gente.",
+      "title": "Convierte cada\nconversación\nen un cliente.",
       "subtitle": "M2 unifica WhatsApp, Instagram, Telegram y email en una sola bandeja. La IA responde con tu tono y te pasa solo las conversaciones que importan.",
       "cta1": "Empezar gratis · 14 días",
       "cta2": "Ver demo (2 min)",
-      "highlightKeywords": ["cada"],
+      "highlightKeywords": ["conversación"],
       "trustText": "+850 equipos crecen con M2",
       "trustRating": "4.9/5"
     },
@@ -225,7 +225,7 @@
     },
     "footer": {
       "tagline": "Una bandeja. Todos los canales. IA que contesta por ti.",
-      "rights": "© 2026 M2 · Hecho con obsesión por PyMEs.",
+      "rights": "© 2026 M2 · Hecho con cariño en Maracaibo.",
       "online": "Todos los sistemas operando",
       "product": "Producto",
       "company": "Compañía",
@@ -246,7 +246,7 @@
       ]
     },
     "meta": {
-      "title": "M2 — Responde cada mensaje. Sin contratar más gente.",
+      "title": "M2 — Convierte cada conversación en un cliente.",
       "description": "M2 unifica WhatsApp, Instagram, Telegram y email en una sola bandeja con IA que responde 24/7 en tu tono de marca."
     }
   },

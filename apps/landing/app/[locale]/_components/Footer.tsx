@@ -2,6 +2,7 @@ import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 
 import type { Lang, NavLink } from "../../../lib/content";
+import { Logo } from "./Logo";
 
 type FooterProps = {
   locale: Lang;
@@ -20,8 +21,8 @@ export async function Footer({ locale }: FooterProps) {
       <div className="container">
         <div className="foot-grid">
           <div className="foot-brand">
-            <Link className="logo" href={locale === "es" ? "/" : "/en"}>
-              <span className="mark">m</span>M2
+            <Link className="logo" aria-label="M2" href={locale === "es" ? "/" : "/en"}>
+              <Logo height={28} />
             </Link>
             <p className="tagline">{t("tagline")}</p>
             <Link className="nav-lang" href={otherHref}>

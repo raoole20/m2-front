@@ -12,11 +12,11 @@
     },
     "hero": {
       "kicker": "New platform · Open beta",
-      "title": "Reply to every message.\nWithout hiring more people.",
+      "title": "Turn every\nconversation\ninto a customer.",
       "subtitle": "M2 unifies WhatsApp, Instagram, Telegram and email in one inbox. AI replies in your tone and hands off only the conversations that matter.",
       "cta1": "Start free · 14 days",
       "cta2": "Watch demo (2 min)",
-      "highlightKeywords": ["every"],
+      "highlightKeywords": ["conversation"],
       "trustText": "+850 teams grow with M2",
       "trustRating": "4.9/5"
     },
@@ -225,7 +225,7 @@
     },
     "footer": {
       "tagline": "One inbox. Every channel. AI that replies for you.",
-      "rights": "© 2026 M2 · Built with obsession for SMBs.",
+      "rights": "© 2026 M2 · Made with love in Maracaibo.",
       "online": "All systems operational",
       "product": "Product",
       "company": "Company",
@@ -246,7 +246,7 @@
       ]
     },
     "meta": {
-      "title": "M2 — Reply to every message. Without hiring more people.",
+      "title": "M2 — Turn every conversation into a customer.",
       "description": "M2 unifies WhatsApp, Instagram, Telegram and email into one AI-powered inbox that replies 24/7 in your brand voice."
     }
   },

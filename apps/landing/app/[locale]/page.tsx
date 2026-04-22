@@ -5,6 +5,7 @@ import { defaultLocale, locales } from "@m2/i18n";
 
 import type { Lang } from "../../lib/content";
 import { Channels } from "./_components/Channels";
+import { CursorGlow } from "./_components/CursorGlow";
 import { FinalCTA } from "./_components/FinalCTA";
 import { Footer } from "./_components/Footer";
 import { Hero } from "./_components/Hero";
@@ -26,6 +27,7 @@ export default async function LandingPage({ params }: { params: Promise<{ locale
 
   return (
     <div className="prop-b3">
+      <CursorGlow />
       <Nav locale={activeLocale} />
       <main>
         <Hero locale={activeLocale} />
