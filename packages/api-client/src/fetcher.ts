@@ -58,11 +58,13 @@ async function runRefresh() {
   tokenStore.set(refreshed);
 }
 
+const AUTH_PATHS = ["/admin/login", "/admin/register", "/admin/recover", "/admin/2fa", "/admin/onboarding", "/en/admin/login", "/en/admin/register", "/en/admin/recover", "/en/admin/2fa", "/en/admin/onboarding"];
+
 function handleAuthFailure() {
   tokenStore?.clear();
   clearSessionSentinel();
 
-  if (typeof window !== "undefined" && !window.location.pathname.includes("/admin/login")) {
+  if (typeof window !== "undefined" && !AUTH_PATHS.some((p) => window.location.pathname.includes(p))) {
     window.location.assign("/admin/login?reason=expired");
   }
 }

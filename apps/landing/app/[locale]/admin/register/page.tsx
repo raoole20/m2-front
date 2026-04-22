@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 
+import { auth, ApiError } from "@m2/api-client";
 import { AppIcon } from "../../../../src/components/m2/AppIcon";
 import { AuthVisual } from "../../../../src/components/m2/AuthVisual";
 import { SocialAuthButtons } from "../../../../src/components/m2/SocialAuthButtons";
@@ -16,16 +17,69 @@ function computeStrength(pw: string): number {
   return Math.min(4, Math.max(0, base));
 }
 
+function toSlug(value: string): string {
+  return value
+    .toLowerCase()
+    .trim()
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/[^a-z0-9-]/g, "")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
 export default function RegisterPage() {
   const router = useRouter();
   const pathname = usePathname() ?? "";
   const locale = pathname.startsWith("/en") ? "en" : "es";
   const base = locale === "es" ? "/admin" : "/en/admin";
 
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [company, setCompany] = useState("");
   const [pw, setPw] = useState("");
+  const [terms, setTerms] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
   const strength = computeStrength(pw);
   const strengthLabel = STRENGTH_LABELS[strength];
   const strengthColor = STRENGTH_COLORS[strength];
+
+  const canSubmit = firstName.trim() && email.trim() && company.trim() && pw.length >= 8 && terms && !loading;
+
+  async function handleSubmit() {
+    if (!canSubmit) return;
+    setError(null);
+    setLoading(true);
+
+    try {
+      await auth.register({
+        tenantName: company.trim(),
+        tenantSlug: toSlug(company),
+        email: email.trim().toLowerCase(),
+        password: pw,
+        name: `${firstName.trim()} ${lastName.trim()}`.trim(),
+      });
+      router.push(`${base}/2fa?email=${encodeURIComponent(email.trim())}&mode=verify`);
+    } catch (err) {
+      if (err instanceof ApiError) {
+        if (err.code === "CONFLICT") {
+          setError("Ya existe una cuenta con ese nombre de empresa. Prueba con otro nombre.");
+        } else if (err.code === "BAD_REQUEST") {
+          setError(err.message);
+        } else {
+          setError("No se pudo crear la cuenta. Intenta de nuevo.");
+        }
+      } else {
+        setError("Error de conexión. Intenta de nuevo.");
+      }
+    } finally {
+      setLoading(false);
+    }
+  }
 
   return (
     <div className="m2-app auth">
@@ -46,14 +100,43 @@ export default function RegisterPage() {
 
             <div className="divider">o con tu email</div>
 
+            {error && (
+              <div
+                role="alert"
+                data-testid="register-error"
+                style={{
+                  padding: "10px 14px",
+                  borderRadius: 8,
+                  background: "rgba(239,68,68,.1)",
+                  border: "1px solid rgba(239,68,68,.25)",
+                  color: "#ef4444",
+                  fontSize: 13,
+                }}
+              >
+                {error}
+              </div>
+            )}
+
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
               <div className="input-group">
                 <label className="label">Nombre</label>
-                <input className="input" placeholder="Andrea" defaultValue="Andrea" />
+                <input
+                  className="input"
+                  placeholder="Andrea"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  data-testid="input-firstname"
+                />
               </div>
               <div className="input-group">
                 <label className="label">Apellido</label>
-                <input className="input" placeholder="Castillo" defaultValue="Castillo" />
+                <input
+                  className="input"
+                  placeholder="Castillo"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                  data-testid="input-lastname"
+                />
               </div>
             </div>
 
@@ -61,7 +144,14 @@ export default function RegisterPage() {
               <label className="label">Email de trabajo</label>
               <div className="input-icon">
                 <AppIcon name="mail" size={16} />
-                <input className="input" type="email" placeholder="tu@empresa.com" defaultValue="andrea@milacafe.mx" />
+                <input
+                  className="input"
+                  type="email"
+                  placeholder="tu@empresa.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  data-testid="input-email"
+                />
               </div>
             </div>
 
@@ -69,7 +159,13 @@ export default function RegisterPage() {
               <label className="label">Empresa</label>
               <div className="input-icon">
                 <AppIcon name="building" size={16} />
-                <input className="input" placeholder="Nombre del negocio" defaultValue="Mila Café" />
+                <input
+                  className="input"
+                  placeholder="Nombre del negocio"
+                  value={company}
+                  onChange={(e) => setCompany(e.target.value)}
+                  data-testid="input-company"
+                />
               </div>
             </div>
 
@@ -83,6 +179,7 @@ export default function RegisterPage() {
                   placeholder="Mínimo 8 caracteres"
                   value={pw}
                   onChange={(e) => setPw(e.target.value)}
+                  data-testid="input-password"
                 />
               </div>
               {pw.length > 0 && (
@@ -98,6 +195,7 @@ export default function RegisterPage() {
                     />
                   </div>
                   <span
+                    data-testid="pw-strength"
                     style={{
                       fontSize: 11,
                       color: strengthColor,
@@ -113,7 +211,12 @@ export default function RegisterPage() {
             </div>
 
             <label className="checkbox" style={{ alignItems: "flex-start" }}>
-              <input type="checkbox" />
+              <input
+                type="checkbox"
+                checked={terms}
+                onChange={(e) => setTerms(e.target.checked)}
+                data-testid="checkbox-terms"
+              />
               <span className="box" style={{ marginTop: 2 }} />
               <span style={{ fontSize: 12.5, color: "var(--text-muted)", lineHeight: 1.4 }}>
                 Acepto los{" "}
@@ -128,8 +231,14 @@ export default function RegisterPage() {
               </span>
             </label>
 
-            <button type="button" className="btn btn-primary" onClick={() => router.push(`${base}/onboarding`)}>
-              Crear cuenta <AppIcon name="arrow-right" size={14} />
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={handleSubmit}
+              disabled={!canSubmit}
+              data-testid="btn-submit"
+            >
+              {loading ? "Creando cuenta…" : <>Crear cuenta <AppIcon name="arrow-right" size={14} /></>}
             </button>
 
             <div className="link-row">

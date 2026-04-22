@@ -2,6 +2,7 @@
   "landing": {
     "nav": {
       "login": "Log in",
+      "cta": "Get started",
       "links": [
         { "label": "Product", "href": "#channels" },
         { "label": "Demo", "href": "#demo" },
@@ -10,90 +11,115 @@
       ]
     },
     "hero": {
-      "kicker": "NATIVE AI · REPLIES 24/7",
-      "title": "The AI that replies for you.\nEverywhere.",
-      "subtitle": "M2 unifies WhatsApp, Instagram, Telegram and Email into one inbox — and answers in your brand voice, around the clock.",
-      "cta1": "Start 14-day trial",
-      "cta2": "See product",
-      "trial14": "14-day trial",
-      "noCard": "No card",
-      "setup3": "3-min setup",
-      "highlightKeywords": ["AI", "Turn conversations", "Stop losing"]
+      "kicker": "New platform · Open beta",
+      "title": "Reply to every message.\nWithout hiring more people.",
+      "subtitle": "M2 unifies WhatsApp, Instagram, Telegram and email in one inbox. AI replies in your tone and hands off only the conversations that matter.",
+      "cta1": "Start free · 14 days",
+      "cta2": "Watch demo (2 min)",
+      "highlightKeywords": ["every"],
+      "trustText": "+850 teams grow with M2",
+      "trustRating": "4.9/5"
     },
-    "chatStage": {
-      "streams": [
-        [
-          { "variant": "wa", "from": "WhatsApp · Laura", "text": "Ship to Monterrey?" },
-          { "variant": "m2", "from": "M2 · AI", "text": "Yes, 24-48h delivery. Want options?" },
-          { "variant": "wa", "from": "WhatsApp · Diego", "text": "Bank transfer ok?" },
-          { "variant": "m2", "from": "M2 · AI", "text": "Of course, sending details." }
-        ],
-        [
-          { "variant": "ig", "from": "Instagram · @mariana", "text": "Size M?" },
-          { "variant": "m2", "from": "M2 · AI", "text": "Yes, 3 in stock." },
-          { "variant": "em", "from": "Email · ana@acme", "text": "Proposal 50u." },
-          { "variant": "m2", "from": "M2 · AI", "text": "Hot lead → escalated" }
-        ],
-        [
-          { "variant": "tg", "from": "Telegram · Carlos", "text": "Support #4521" },
-          { "variant": "m2", "from": "M2 · AI", "text": "Routing to human agent." },
-          { "variant": "ig", "from": "Instagram · @foodie", "text": "Hours today?" },
-          { "variant": "m2", "from": "M2 · AI", "text": "Open 10am-10pm." }
-        ]
+    "appWindow": {
+      "addrPrefix": "app.m2.ai",
+      "addrSuffix": "inbox",
+      "inboxTitle": "Inbox",
+      "threadContact": "@mariana.d",
+      "threadChannel": "Instagram",
+      "online": "online",
+      "threadIncoming1": "Hi! Do you have the jacket in size M?",
+      "threadAiLabel": "M2 · AI · 92% confidence",
+      "threadAi": "Hi Mariana! Yes, we have 3 available in M. Want me to send the link so you can check it out?",
+      "threadIncoming2": "Yes please 🙏",
+      "floatResponseLabel": "Response time",
+      "floatResponseValue": "1.2s",
+      "floatConversationsLabel": "Conversations",
+      "floatConversationsValue": "+18 today",
+      "floatResolvedLabel": "AI resolved",
+      "floatResolvedValue": "87%",
+      "heroMetricValue": "+340%",
+      "heroMetricLabel": "Conversions",
+      "items": [
+        { "name": "Laura G.", "channel": "whatsapp", "preview": "Ship to Monterrey?", "time": "2m", "initials": "LG" },
+        { "name": "@mariana.d", "channel": "instagram", "preview": "Size M available?", "time": "5m", "initials": "M" },
+        { "name": "Carlos R.", "channel": "telegram", "preview": "Support order #4521", "time": "12m", "initials": "CR" },
+        { "name": "ana@acme.co", "channel": "email", "preview": "Proposal 50 units", "time": "1h", "initials": "A" },
+        { "name": "Jorge L.", "channel": "whatsapp", "preview": "Quote 10 units", "time": "2h", "initials": "JL" }
+      ]
+    },
+    "logos": {
+      "label": "Teams replying with M2",
+      "items": [
+        { "text": "Luna Boutique", "sans": false },
+        { "text": "NÓMADA", "sans": true },
+        { "text": "Mila & Co.", "sans": false },
+        { "text": "TALLER 33", "sans": true },
+        { "text": "Estudio Ocho", "sans": false },
+        { "text": "RUTA VERDE", "sans": true }
+      ]
+    },
+    "metrics": {
+      "items": [
+        { "valuePre": "+", "valueEm": "340", "valueSuf": "%", "label": "More conversions vs. delayed human reply" },
+        { "valuePre": "", "valueEm": "87", "valueSuf": "%", "label": "Conversations resolved by AI, without handoff" },
+        { "valuePre": "", "valueEm": "1.2", "valueSuf": "s", "label": "Average first response time" },
+        { "valuePre": "", "valueEm": "4", "valueSuf": " min", "label": "To set up your first channel" }
       ]
     },
     "channels": {
-      "section": "CHANNELS",
-      "title": "Four channels. One inbox. Zero chaos.",
+      "kicker": "Unified channels",
+      "titlePre": "Every channel speaks differently. M2 ",
+      "titleEm": "gets",
+      "titleSuf": " them all.",
       "lede": "Connect once. Reply anywhere. AI adapts tone, format and timing — never sounds like a bot.",
-      "volumeLabel": "today",
-      "sampleLabel": "Real message",
+      "badges": [
+        { "key": "whatsapp", "name": "WhatsApp", "region": "MX", "style": "top:22%;left:18%" },
+        { "key": "instagram", "name": "Instagram", "region": "ES", "style": "top:36%;right:14%" },
+        { "key": "telegram", "name": "Telegram", "region": "CO", "style": "bottom:30%;left:10%" },
+        { "key": "email", "name": "Email", "region": "BR", "style": "bottom:14%;right:22%" }
+      ],
       "items": [
         {
           "key": "whatsapp",
           "name": "WhatsApp",
-          "volume": "8.2k",
           "desc": "Auto-replies, templates and seamless handoff.",
           "sample": "Hi, are you still open?"
         },
         {
           "key": "instagram",
           "name": "Instagram",
-          "volume": "3.4k",
           "desc": "DMs, comments and story replies in one place.",
           "sample": "How much is this product?"
         },
         {
           "key": "telegram",
           "name": "Telegram",
-          "volume": "1.1k",
           "desc": "Bots and channels handled by AI and your team.",
           "sample": "Need technical support"
         },
         {
           "key": "email",
           "name": "Email",
-          "volume": "940",
           "desc": "Unified inbox with summaries and suggested replies.",
           "sample": "Invoice for order #4521"
         }
       ]
     },
     "demo": {
-      "section": "DEMO",
-      "title": "One inbox. All your messaging.",
-      "lede": "This is M2 when messages pour in from everywhere. Priority, AI draft and human handoff — one view.",
-      "tabs": { "inbox": "Inbox", "automations": "Automations", "analytics": "Analytics" },
+      "kicker": "The unified inbox",
+      "titlePre": "One inbox. All channels. ",
+      "titleEm": "Zero",
+      "titleSuf": " chaos.",
+      "lede": "Priority, AI draft and human handoff — all in one view. What your team needs, nothing it doesn't.",
       "sidebar": {
         "title": "Inbox",
-        "unread": "unread",
-        "allInbox": "All inbox"
+        "countTpl": "{total} · {unread} unread"
       },
       "priority": "High priority",
       "aiDraftLabel": "M2 · AI draft",
-      "aiTagLine": "· AI tagged as \"hot lead\" · 92% confidence ·",
+      "aiTagLine": "· AI tagged as hot lead · 92% confidence ·",
       "aiDraft": "Hi Laura! Yes, we ship to Monterrey in 24–48h. Free shipping on orders over $75. Want me to share the catalog?",
-      "draftReady": "Draft ready to send — tweak tone or send as-is.",
+      "draftReady": "Draft ready — tweak tone or send as-is.",
       "edit": "Edit",
       "send": "Send",
       "aiSummary": "AI summary",
@@ -106,25 +132,51 @@
         "Schedule 24h follow-up",
         "Tag as \"MTY · new\""
       ],
-      "channelSummary": [
-        { "key": "all", "label": "All inbox", "volume": "13.6k" },
-        { "key": "whatsapp", "label": "WhatsApp", "volume": "8.2k" },
-        { "key": "instagram", "label": "Instagram", "volume": "3.4k" },
-        { "key": "telegram", "label": "Telegram", "volume": "1.1k" },
-        { "key": "email", "label": "Email", "volume": "940" }
-      ],
       "items": [
         { "name": "Laura G.", "channel": "whatsapp", "preview": "Ship to Monterrey?", "time": "2m", "initials": "LG" },
         { "name": "@mariana.d", "channel": "instagram", "preview": "Size M available?", "time": "5m", "initials": "M" },
         { "name": "Carlos R.", "channel": "telegram", "preview": "Support order #4521", "time": "12m", "initials": "CR" },
         { "name": "ana@acme.co", "channel": "email", "preview": "Proposal 50 units", "time": "1h", "initials": "A" },
-        { "name": "Jorge L.", "channel": "whatsapp", "preview": "Quote 10 units", "time": "2h", "initials": "JL" },
-        { "name": "@foodielover", "channel": "instagram", "preview": "Today's hours?", "time": "3h", "initials": "F" }
+        { "name": "Jorge L.", "channel": "whatsapp", "preview": "Quote 10 units", "time": "2h", "initials": "JL" }
+      ]
+    },
+    "testimonials": {
+      "kicker": "They trust M2",
+      "titlePre": "Real teams. ",
+      "titleEm": "Real",
+      "titleSuf": " results.",
+      "items": [
+        {
+          "featured": true,
+          "quote": "We went from losing 3 out of 10 messages to replying to all of them in under 2 minutes. The AI sounds like my team — not a bot.",
+          "name": "María Elena Rojas",
+          "role": "Founder · Luna Boutique",
+          "initials": "MR",
+          "avatar": "pink"
+        },
+        {
+          "featured": false,
+          "quote": "Hooked up WhatsApp and Instagram in 4 minutes. Next day we had 2 new sales from messages that used to go unanswered.",
+          "name": "Diego Hernández",
+          "role": "CEO · Nómada Wear",
+          "initials": "DH",
+          "avatar": "blue"
+        },
+        {
+          "featured": false,
+          "quote": "The human handoff is the killer feature. AI handles 80% and hands off only what matters — with full context ready.",
+          "name": "Sofía Campos",
+          "role": "Head of Support · Taller 33",
+          "initials": "SC",
+          "avatar": "amber"
+        }
       ]
     },
     "how": {
-      "section": "HOW IT WORKS",
-      "title": "No code. No consultants. No drama.",
+      "kicker": "How it works",
+      "titlePre": "No code. No consultants. ",
+      "titleEm": "No drama",
+      "titleSuf": ".",
       "steps": [
         { "n": "01", "title": "Connect your channels", "desc": "Link WhatsApp Business, Instagram, Telegram and email in under 3 minutes. No code." },
         { "n": "02", "title": "Train the AI with your brand", "desc": "Upload FAQs, products, and tone. M2 learns to reply the way you would — in seconds." },
@@ -133,9 +185,11 @@
       ]
     },
     "pricing": {
-      "section": "PRICING",
-      "title": "Start small. Scale when it hurts.",
-      "mostPopular": "Most popular",
+      "kicker": "Plans",
+      "titlePre": "Start small. ",
+      "titleEm": "Scale",
+      "titleSuf": " when it hurts.",
+      "mostPopular": "Popular",
       "tiers": [
         {
           "tier": "Starter",
@@ -162,16 +216,17 @@
       ]
     },
     "finalCta": {
-      "titlePre": "Your inbox,",
-      "titleHighlight": "handled.",
+      "titlePre": "Stop losing messages. Start ",
+      "titleEm": "today",
+      "titleSuf": ".",
       "subtitle": "14 days free. No card. No painful setup.",
-      "primary": "Start 14-day trial",
+      "primary": "Start free · 14 days",
       "secondary": "Talk to sales"
     },
     "footer": {
       "tagline": "One inbox. Every channel. AI that replies for you.",
       "rights": "© 2026 M2 · Built with obsession for SMBs.",
-      "online": "online",
+      "online": "All systems operational",
       "product": "Product",
       "company": "Company",
       "legal": "Legal",
@@ -191,8 +246,8 @@
       ]
     },
     "meta": {
-      "title": "M2 — The AI that replies for you, everywhere.",
-      "description": "Unify WhatsApp, Instagram, Telegram and Email into one AI-powered inbox that replies 24/7 in your brand voice."
+      "title": "M2 — Reply to every message. Without hiring more people.",
+      "description": "M2 unifies WhatsApp, Instagram, Telegram and email into one AI-powered inbox that replies 24/7 in your brand voice."
     }
   },
   "admin": {

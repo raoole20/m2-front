@@ -11,8 +11,12 @@ export async function HowItWorks() {
     <section className="block" id="how">
       <div className="container">
         <Reveal className="section-head">
-          <span className="kicker">[ 03 ] {t("section")}</span>
-          <h2>{t("title")}</h2>
+          <span className="kicker">{t("kicker")}</span>
+          <h2>
+            {t("titlePre")}
+            <em>{t("titleEm")}</em>
+            {t("titleSuf")}
+          </h2>
         </Reveal>
         <div className="steps">
           {steps.map((step, idx) => (

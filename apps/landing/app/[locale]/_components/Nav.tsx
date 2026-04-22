@@ -35,9 +35,12 @@ export async function Nav({ locale }: NavProps) {
           <Link className="nav-lang" href={otherHref}>
             {otherLocale.toUpperCase()}
           </Link>
-          <Link className="btn btn-primary" href={adminLoginHref(locale)}>
+          <Link className="nav-login" href={adminLoginHref(locale)}>
             {t("login")}
-            <ArrowRight size={14} />
+          </Link>
+          <Link className="btn btn-primary" href={adminLoginHref(locale)}>
+            {t("cta")}
+            <ArrowRight size={13} />
           </Link>
         </div>
       </div>

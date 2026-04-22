@@ -21,7 +21,9 @@ export async function FinalCTA({ locale }: FinalCTAProps) {
       <div className="container">
         <Reveal className="cta-block">
           <h2>
-            {t("titlePre")} <em>{t("titleHighlight")}</em>
+            {t("titlePre")}
+            <em>{t("titleEm")}</em>
+            {t("titleSuf")}
           </h2>
           <p>{t("subtitle")}</p>
           <div className="cta-row">

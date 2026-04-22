@@ -10,8 +10,11 @@ import { Footer } from "./_components/Footer";
 import { Hero } from "./_components/Hero";
 import { HowItWorks } from "./_components/HowItWorks";
 import { InboxSection } from "./_components/InboxSection";
+import { LogosBar } from "./_components/LogosBar";
+import { MetricsStrip } from "./_components/MetricsStrip";
 import { Nav } from "./_components/Nav";
 import { Pricing } from "./_components/Pricing";
+import { Testimonials } from "./_components/Testimonials";
 
 export default async function LandingPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -22,12 +25,15 @@ export default async function LandingPage({ params }: { params: Promise<{ locale
   const activeLocale = (locale || defaultLocale) as Lang;
 
   return (
-    <div className="prop-b">
+    <div className="prop-b3">
       <Nav locale={activeLocale} />
       <main>
         <Hero locale={activeLocale} />
+        <LogosBar />
+        <MetricsStrip />
         <Channels />
         <InboxSection />
+        <Testimonials />
         <HowItWorks />
         <Pricing />
         <FinalCTA locale={activeLocale} />

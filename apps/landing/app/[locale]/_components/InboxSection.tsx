@@ -1,21 +1,19 @@
 import { getTranslations } from "next-intl/server";
 
-import type { ChannelSummary, InboxItem } from "../../../lib/content";
+import type { InboxItem } from "../../../lib/content";
 import { InboxDemo } from "./InboxDemo";
 import { Reveal } from "./Reveal";
 
 export async function InboxSection() {
   const t = await getTranslations("landing.demo");
   const items = t.raw("items") as InboxItem[];
-  const channelSummary = t.raw("channelSummary") as ChannelSummary[];
   const actions = t.raw("actions") as string[];
+  const unread = 2;
+  const sidebarCount = t("sidebar.countTpl", { total: items.length, unread });
 
   const strings = {
-    tabInbox: t("tabs.inbox"),
-    tabAutomations: t("tabs.automations"),
-    tabAnalytics: t("tabs.analytics"),
     sidebarTitle: t("sidebar.title"),
-    unread: t("sidebar.unread"),
+    sidebarCount,
     priority: t("priority"),
     aiDraftLabel: t("aiDraftLabel"),
     aiTagLine: t("aiTagLine"),
@@ -34,17 +32,16 @@ export async function InboxSection() {
     <section className="block" id="demo">
       <div className="container">
         <Reveal className="section-head">
-          <span className="kicker">[ 02 ] {t("section")}</span>
-          <h2>{t("title")}</h2>
+          <span className="kicker">{t("kicker")}</span>
+          <h2>
+            {t("titlePre")}
+            <em>{t("titleEm")}</em>
+            {t("titleSuf")}
+          </h2>
           <p>{t("lede")}</p>
         </Reveal>
         <Reveal>
-          <InboxDemo
-            items={items}
-            channelSummary={channelSummary}
-            actions={actions}
-            strings={strings}
-          />
+          <InboxDemo items={items} actions={actions} strings={strings} />
         </Reveal>
       </div>
     </section>
