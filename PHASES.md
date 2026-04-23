@@ -131,3 +131,18 @@ Build order within this phase:
 11. `app/(auth)/onboarding.tsx` — name + avatar stub
 
 [] TODO: estudiar sobre mono repos
+[] TODO: crear tenant -> se crea automatico al crear un nuuevo usuario  
+    [] TODO: evaluar si es en el wizard
+[] TODO: crear chanel -> ws - instagram - tg
+[] TODO: enlazar con API  (evolution - meta)
+[] TODO: Obtener QR
+[] TODO: probar que se conecte desde el tlfn
+[] TODO: contexto de AI (como responde)
+
+
+
+------
+MEJORAR
+[] TODO: wizzard debe contener info del tenant (nombre, razon social, etc...)
+[] TODO: crear el canal tl - instagram - etc...
+[] TODO: IA contexto (cerebro)
