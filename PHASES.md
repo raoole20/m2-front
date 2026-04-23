@@ -146,3 +146,18 @@ MEJORAR
 [] TODO: wizzard debe contener info del tenant (nombre, razon social, etc...)
 [] TODO: crear el canal tl - instagram - etc...
 [] TODO: IA contexto (cerebro)
+
+
+---- 
+Pasos para seguir si quiero avanzar con el admin.
+Que Quiero lograr hoy? quiero poder crear el bot desde la plataforma
+
+Como lo veo? simple.
+
+login
+wizzard
+usuario escanea qr
+bot funcionando
+
+eso lo puedo hacer, pero tiene muchos pasos extras, como que para escanear el qr, debo crear el tenant y el channel
+pero para eso debo estudiar como funcioan las tablas de las bases de datos
