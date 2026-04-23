@@ -10,10 +10,12 @@ import { clearSessionSentinel } from "./session-cookie";
 import type { TokenStore } from "./token-store";
 import { unwrap, type Envelope } from "./unwrap";
 
-const baseUrl = process.env.NEXT_PUBLIC_API_URL;
-
-if (!baseUrl) {
-  throw new Error("NEXT_PUBLIC_API_URL missing");
+function getBaseUrl(): string {
+  const url = process.env.NEXT_PUBLIC_API_URL;
+  if (!url) {
+    throw new Error("NEXT_PUBLIC_API_URL missing — define it in .env.local");
+  }
+  return url;
 }
 
 let tokenStore: TokenStore | null = null;
@@ -37,7 +39,7 @@ async function runRefresh() {
     throw new UnauthorizedError();
   }
 
-  const response = await fetch(`${baseUrl}/auth/refresh`, {
+  const response = await fetch(`${getBaseUrl()}/auth/refresh`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -84,7 +86,7 @@ export async function fetcher<T>(path: string, init: FetcherOptions = {}): Promi
   let response: Response;
 
   try {
-    response = await fetch(`${baseUrl}${path}`, {
+    response = await fetch(`${getBaseUrl()}${path}`, {
       ...init,
       headers,
     });

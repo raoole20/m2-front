@@ -1,4 +1,4 @@
-import { QueryCache, QueryClient } from "@tanstack/react-query";
+import { MutationCache, QueryCache, QueryClient } from "@tanstack/react-query";
 
 import { pushToast } from "./toast-bus";
 import { mapApiErrorToToast } from "./error-toast";
@@ -6,6 +6,14 @@ import { mapApiErrorToToast } from "./error-toast";
 export function createQueryClient() {
   return new QueryClient({
     queryCache: new QueryCache({
+      onError(error) {
+        const toast = mapApiErrorToToast(error);
+        if (toast) {
+          pushToast(toast);
+        }
+      },
+    }),
+    mutationCache: new MutationCache({
       onError(error) {
         const toast = mapApiErrorToToast(error);
         if (toast) {
