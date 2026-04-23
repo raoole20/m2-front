@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { getTranslations } from "next-intl/server";
 
-import { TRUST_AVATAR_GRADIENTS, type Lang } from "../../../lib/content";
+import { TRUST_AVATAR_GRADIENTS, type Lang } from "../../lib/content";
 import { AppWindow } from "./AppWindow";
 import { Reveal } from "./Reveal";
 

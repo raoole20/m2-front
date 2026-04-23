@@ -1,6 +1,6 @@
 import { getTranslations } from "next-intl/server";
 
-import type { InboxItem } from "../../../lib/content";
+import type { InboxItem } from "../../lib/content";
 import { InboxDemo } from "./InboxDemo";
 import { Reveal } from "./Reveal";
 

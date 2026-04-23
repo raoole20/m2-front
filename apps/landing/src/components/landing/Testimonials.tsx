@@ -3,7 +3,7 @@ import { getTranslations } from "next-intl/server";
 import {
   TESTIMONIAL_AVATAR_GRADIENTS,
   type TestimonialItem,
-} from "../../../lib/content";
+} from "../../lib/content";
 import { Reveal } from "./Reveal";
 
 export async function Testimonials() {

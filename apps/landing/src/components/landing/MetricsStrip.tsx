@@ -1,6 +1,6 @@
 import { getTranslations } from "next-intl/server";
 
-import type { MetricItem } from "../../../lib/content";
+import type { MetricItem } from "../../lib/content";
 import { Reveal } from "./Reveal";
 
 export async function MetricsStrip() {

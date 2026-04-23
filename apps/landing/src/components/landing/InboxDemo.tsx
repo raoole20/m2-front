@@ -6,7 +6,7 @@ import {
   CHANNEL_COLORS,
   CHANNEL_GRADIENTS,
   type InboxItem,
-} from "../../../lib/content";
+} from "../../lib/content";
 
 type InboxStrings = {
   sidebarTitle: string;

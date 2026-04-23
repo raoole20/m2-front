@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 
-import type { Lang, NavLink } from "../../../lib/content";
+import type { Lang, NavLink } from "../../lib/content";
 import { Logo } from "../Logo";
 
 type FooterProps = {

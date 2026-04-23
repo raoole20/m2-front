@@ -1,6 +1,6 @@
 import { getTranslations } from "next-intl/server";
 
-import type { StepItem } from "../../../lib/content";
+import type { StepItem } from "../../lib/content";
 import { Reveal } from "./Reveal";
 
 export async function HowItWorks() {

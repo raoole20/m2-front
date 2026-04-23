@@ -12,7 +12,7 @@ import {
   type Variants,
 } from "motion/react";
 
-import type { NavLink } from "../../../lib/content";
+import type { NavLink } from "../../lib/content";
 import { Logo } from "../Logo";
 
 type NavShellProps = {

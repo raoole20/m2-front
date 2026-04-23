@@ -4,7 +4,7 @@ import {
   CHANNEL_BADGE_GRADIENTS,
   CHANNEL_GRADIENTS,
   type InboxItem,
-} from "../../../lib/content";
+} from "../../lib/content";
 
 function SidebarIcon({ children }: { children: React.ReactNode }) {
   return (

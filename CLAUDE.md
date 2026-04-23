@@ -71,12 +71,16 @@ La home (`[locale]/page.tsx`) se queda en la raíz del locale; hereda directo de
 2. **Página pública nueva** → `app/[locale]/(landing)/<segmento>/page.tsx`.
 3. **Página admin nueva** → `app/[locale]/(admin)/admin/<segmento>/page.tsx`.
 4. **Nueva área de primer nivel** (ej. portal cliente) → nuevo grupo `(portal)/portal/...` siguiendo el mismo patrón grupo + segmento.
-5. **Componentes no-ruta** nunca viven dentro de `app/`. Van a `apps/landing/src/components/` con esta estructura:
+5. **Todo el código que no es ruta vive bajo `apps/landing/src/`.** En la raíz del app solo quedan `app/`, `public/`, `tests/`, `middleware.ts` y los archivos de config (`next.config.ts`, `tailwind.config.ts`, `tsconfig.json`, `components.json`, `postcss.config.cjs`, `playwright.config.ts`, `vercel.json`). Estructura de `src/`:
+   - `src/components/ui/` → primitivos shadcn (button, carousel)
    - `src/components/landing/` → componentes de la landing pública (Hero, Nav, Footer, Pricing, etc.)
    - `src/components/m2/` → componentes específicos del admin (AppShell, AppIcon, AuthVisual…)
-   - `src/components/` (raíz) → componentes compartidos entre áreas (`Logo`, `ToastProvider`) y providers (`AdminProviders`)
-   - `components/ui/` (raíz de landing) → primitivos tipo shadcn (button, carousel) — existente
-   Importa con alias: `import { Hero } from "@/src/components/landing/Hero"`.
+   - `src/components/` (raíz) → compartidos entre áreas y providers (`Logo`, `ToastProvider`, `AdminProviders`)
+   - `src/lib/` → helpers puros (`content`, `utils`, `query-client`, `roles`, `error-toast`, `toast-bus`)
+   - `src/hooks/`, `src/mock/`, `src/store/` → según corresponda
+   - `src/i18n/request.ts` → config de `next-intl` (referenciada desde `next.config.ts`)
+   - `src/messages/{en,es}.json` → traducciones (cargadas dinámicamente por `src/i18n/request.ts`)
+   Importa con alias: `import { cn } from "@/src/lib/utils"`. El alias `@/*` apunta al root del app (`apps/landing/`), no a `src/`.
 6. **Archivos SEO/CSS raíz** (`robots.ts`, `sitemap.ts`, `globals.css`, `m2.css`, `app/layout.tsx`) viven en `app/` y no se mueven — son especiales de Next.js.
 
 > `apps/mobile` ya usa su propia convención con route groups `(auth)` y `(app)` de Expo Router. No aplica la regla de arriba.

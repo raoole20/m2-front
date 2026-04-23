@@ -1,6 +1,6 @@
 import { getTranslations } from "next-intl/server";
 
-import type { Lang, NavLink } from "../../../lib/content";
+import type { Lang, NavLink } from "../../lib/content";
 import { NavShell } from "./NavShell";
 
 type NavProps = {

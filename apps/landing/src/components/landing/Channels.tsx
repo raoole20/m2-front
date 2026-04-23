@@ -7,7 +7,7 @@ import {
   CHANNEL_ICONS,
   type ChannelBadge,
   type ChannelItem,
-} from "../../../lib/content";
+} from "../../lib/content";
 import { DotGlobe } from "./DotGlobe";
 import { Reveal } from "./Reveal";
 

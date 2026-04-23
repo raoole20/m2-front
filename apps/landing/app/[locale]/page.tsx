@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 
 import { defaultLocale, locales } from "@m2/i18n";
 
-import type { Lang } from "../../lib/content";
+import type { Lang } from "@/src/lib/content";
 import { Channels } from "@/src/components/landing/Channels";
 import { CursorGlow } from "@/src/components/landing/CursorGlow";
 import { FinalCTA } from "@/src/components/landing/FinalCTA";

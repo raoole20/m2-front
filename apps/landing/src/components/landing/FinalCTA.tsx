@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 
-import type { Lang } from "../../../lib/content";
+import type { Lang } from "../../lib/content";
 import { Reveal } from "./Reveal";
 
 type FinalCTAProps = {

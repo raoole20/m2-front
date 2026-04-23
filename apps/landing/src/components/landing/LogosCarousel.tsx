@@ -6,8 +6,8 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-} from "@/components/ui/carousel";
-import type { LogoItem } from "../../../lib/content";
+} from "@/src/components/ui/carousel";
+import type { LogoItem } from "../../lib/content";
 
 export function LogosCarousel({ items }: { items: LogoItem[] }) {
   return (

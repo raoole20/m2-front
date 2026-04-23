@@ -1,6 +1,6 @@
 import { getTranslations } from "next-intl/server";
 
-import type { LogoItem } from "../../../lib/content";
+import type { LogoItem } from "../../lib/content";
 import { LogosCarousel } from "./LogosCarousel";
 
 export async function LogosBar() {

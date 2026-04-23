@@ -1,6 +1,6 @@
 import { getTranslations } from "next-intl/server";
 
-import type { PriceTier } from "../../../lib/content";
+import type { PriceTier } from "../../lib/content";
 import { Reveal } from "./Reveal";
 
 export async function Pricing() {
