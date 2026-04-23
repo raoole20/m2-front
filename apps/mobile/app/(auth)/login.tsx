@@ -45,7 +45,7 @@ export default function LoginScreen() {
   const [loadingGoogle, setLoadingGoogle] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const canSubmit = email.trim().length > 0 && password.length >= 6;
+  const canSubmit = email.trim().length > 0 && password.length >= 8;
 
   async function handleEmailSignIn() {
     if (!canSubmit) return;

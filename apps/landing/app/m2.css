@@ -8,9 +8,21 @@
   --m2-font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
 }
 
-@keyframes floatBubble {
-  0%, 100% { transform: translateY(0) rotate(-1deg); }
-  50% { transform: translateY(-15px) rotate(1deg); }
+@keyframes floatA {
+  0%, 100% { transform: translate3d(0, 0, var(--z, 0px)) rotate(var(--rot, 0deg)); }
+  50%      { transform: translate3d(0, -14px, calc(var(--z, 0px) + 6px)) rotate(calc(var(--rot, 0deg) + 1.2deg)); }
+}
+@keyframes floatB {
+  0%, 100% { transform: translate3d(0, 0, var(--z, 0px)) rotate(var(--rot, 0deg)); }
+  50%      { transform: translate3d(3px, -9px, calc(var(--z, 0px) + 10px)) rotate(calc(var(--rot, 0deg) - 1deg)); }
+}
+@keyframes floatC {
+  0%, 100% { transform: translate3d(0, 0, var(--z, 0px)) rotate(var(--rot, 0deg)); }
+  50%      { transform: translate3d(-4px, -18px, calc(var(--z, 0px) + 4px)) rotate(calc(var(--rot, 0deg) + 0.8deg)); }
+}
+@keyframes bubbleEnter {
+  from { opacity: 0; transform: translate3d(0, 18px, calc(var(--z, 0px) - 40px)) scale(.92) rotate(var(--rot, 0deg)); }
+  to   { opacity: var(--fb-opacity, 1); transform: translate3d(0, 0, var(--z, 0px)) rotate(var(--rot, 0deg)); }
 }
 
 .m2-app {
@@ -341,15 +353,8 @@
   position: relative;
 }
 .m2-app .auth-form-col .auth-logo {
-  display: inline-flex; align-items: center; gap: 9px;
-  font-weight: 600; font-size: 16px;
+  display: inline-flex; align-items: center;
   text-decoration: none; color: var(--text);
-}
-.m2-app .auth-form-col .auth-logo .mark {
-  width: 28px; height: 28px; border-radius: 8px;
-  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-soft) 100%);
-  color: #2a1a00;
-  display: grid; place-items: center; font-weight: 700; font-size: 14px;
 }
 .m2-app .auth-form-wrap { flex: 1; display: grid; place-items: center; }
 .m2-app .auth-form {
@@ -417,40 +422,30 @@
     linear-gradient(160deg, #120a05, #0a0807);
   overflow: hidden;
   border-left: 1px solid var(--border);
-  display: grid; place-items: center;
   padding: 40px;
   isolation: isolate;
 }
 @media (max-width: 900px) { .m2-app .auth-visual-col { display: none; } }
-.m2-app .auth-visual-col .visual-quote {
-  position: relative;
-  max-width: 420px;
-  z-index: 3;
-  color: var(--text);
-}
-.m2-app .auth-visual-col .visual-quote .q {
-  font-size: 24px; font-weight: 500; line-height: 1.35; letter-spacing: -0.01em;
-  margin-bottom: 20px;
-}
-.m2-app .auth-visual-col .visual-quote .q em { color: var(--accent-soft); font-style: normal; }
-.m2-app .auth-visual-col .visual-quote .byline {
-  display: flex; align-items: center; gap: 12px;
-  font-size: 13px; color: var(--text-muted);
-}
-.m2-app .auth-visual-col .visual-quote .byline .ava {
-  width: 36px; height: 36px; border-radius: 50%;
-  background: linear-gradient(135deg, #8b5cf6, #ec4899);
-  display: grid; place-items: center;
-  font-weight: 700; font-size: 13px; color: white;
-}
 
 .m2-app .auth-visual-col .floating-bubbles {
   position: absolute; inset: 0;
   overflow: hidden;
   z-index: 1;
-  opacity: .5;
+  perspective: 1200px;
+  perspective-origin: 50% 45%;
+}
+.m2-app .auth-visual-col .floating-bubbles .stage {
+  position: absolute; inset: 0;
+  z-index: 2;
+  transform-style: preserve-3d;
+  transform:
+    rotateX(calc(var(--my, 0) * 5deg))
+    rotateY(calc(var(--mx, 0) * -5deg));
+  transition: transform 220ms ease-out;
+  will-change: transform;
 }
 .m2-app .auth-visual-col .floating-bubbles .fb {
+  --fb-opacity: calc(.55 + var(--z-opacity, 0.5) * .45);
   position: absolute;
   padding: 9px 12px;
   border-radius: 14px;
@@ -460,7 +455,36 @@
   max-width: 180px;
   line-height: 1.35;
   color: var(--text);
-  animation: floatBubble 15s ease-in-out infinite;
+  opacity: var(--fb-opacity);
+  filter: blur(calc(max(0px, (0px - var(--z, 0px))) * 0.05));
+  box-shadow:
+    0 calc(var(--z, 0px) * 0.25 + 8px)
+    calc(var(--z, 0px) * 0.4 + 22px)
+    rgba(0,0,0,.35);
+  transform: translate3d(0, 0, var(--z, 0px)) rotate(var(--rot, 0deg));
+  transform-style: preserve-3d;
+  animation:
+    bubbleEnter .7s ease-out both var(--delay, 0s),
+    floatA 14s ease-in-out infinite calc(var(--delay, 0s) + .7s);
+  transition: transform 200ms ease-out, box-shadow 200ms ease-out;
+  will-change: transform;
+}
+.m2-app .auth-visual-col .floating-bubbles .stage .fb:nth-child(3n+2) {
+  animation:
+    bubbleEnter .7s ease-out both var(--delay, 0s),
+    floatB 11s ease-in-out infinite calc(var(--delay, 0s) + .7s);
+}
+.m2-app .auth-visual-col .floating-bubbles .stage .fb:nth-child(3n+3) {
+  animation:
+    bubbleEnter .7s ease-out both var(--delay, 0s),
+    floatC 17s ease-in-out infinite calc(var(--delay, 0s) + .7s);
+}
+.m2-app .auth-visual-col .floating-bubbles .fb:hover {
+  transform: translate3d(0, -4px, calc(var(--z, 0px) + 24px)) rotate(var(--rot, 0deg));
+  box-shadow:
+    0 calc(var(--z, 0px) * 0.3 + 18px)
+    calc(var(--z, 0px) * 0.45 + 32px)
+    rgba(0,0,0,.45);
 }
 .m2-app .auth-visual-col .floating-bubbles .fb .from {
   display: block;
@@ -468,11 +492,26 @@
   color: var(--text-dim); margin-bottom: 3px;
   text-transform: uppercase; letter-spacing: .06em;
 }
-.m2-app .auth-visual-col .floating-bubbles .fb.wa { background: rgba(37,211,102,.12); }
-.m2-app .auth-visual-col .floating-bubbles .fb.ig { background: rgba(225,48,108,.12); }
-.m2-app .auth-visual-col .floating-bubbles .fb.tg { background: rgba(41,182,246,.12); }
-.m2-app .auth-visual-col .floating-bubbles .fb.em { background: rgba(167,139,250,.12); }
-.m2-app .auth-visual-col .floating-bubbles .fb.m2 { background: rgba(139,140,247,.14); }
+.m2-app .auth-visual-col .floating-bubbles .fb.wa { background: rgba(37,211,102,.14); }
+.m2-app .auth-visual-col .floating-bubbles .fb.ig { background: rgba(225,48,108,.14); }
+.m2-app .auth-visual-col .floating-bubbles .fb.tg { background: rgba(41,182,246,.14); }
+.m2-app .auth-visual-col .floating-bubbles .fb.em { background: rgba(167,139,250,.14); }
+.m2-app .auth-visual-col .floating-bubbles .fb.fm { background: rgba(0,153,255,.14); }
+.m2-app .auth-visual-col .floating-bubbles .fb.li { background: rgba(10,102,194,.16); }
+.m2-app .auth-visual-col .floating-bubbles .fb.sm { background: rgba(148,163,184,.14); }
+.m2-app .auth-visual-col .floating-bubbles .fb.m2 {
+  background: rgba(139,140,247,.18);
+  border-color: rgba(139,140,247,.22);
+  box-shadow:
+    0 calc(var(--z, 0px) * 0.25 + 10px) calc(var(--z, 0px) * 0.45 + 26px) rgba(0,0,0,.4),
+    0 0 calc(var(--z, 0px) * 0.35 + 18px) rgba(139,140,247,.22);
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .m2-app .auth-visual-col .floating-bubbles .stage { transform: none; transition: none; }
+  .m2-app .auth-visual-col .floating-bubbles .fb { animation: none; }
+}
 
 .m2-app .auth-visual-col .visual-stats {
   position: absolute; bottom: 40px; left: 40px; right: 40px;

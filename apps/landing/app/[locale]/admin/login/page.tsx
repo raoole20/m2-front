@@ -8,6 +8,7 @@ import { auth, createBrowserTokenStore, setTokenStore, ApiError } from "@m2/api-
 import { AppIcon } from "../../../../src/components/m2/AppIcon";
 import { AuthVisual } from "../../../../src/components/m2/AuthVisual";
 import { SocialAuthButtons } from "../../../../src/components/m2/SocialAuthButtons";
+import { Logo } from "../../_components/Logo";
 
 const tokenStore = createBrowserTokenStore();
 setTokenStore(tokenStore);
@@ -32,7 +33,7 @@ export default function LoginPage() {
     try {
       const data = await auth.login({ email, password });
       tokenStore.set({ accessToken: data.accessToken, refreshToken: data.refreshToken });
-      router.push(`${base}/2fa`);
+      router.push(`${base}/dashboard`);
     } catch (err) {
       if (err instanceof ApiError) {
         if (err.message === "EMAIL_NOT_VERIFIED") {
@@ -52,7 +53,7 @@ export default function LoginPage() {
     <div className="m2-app auth">
       <div className="auth-form-col">
         <Link href={`${base}/dashboard`} className="auth-logo">
-          <span className="mark">m</span>M2
+          <Logo height={28} />
         </Link>
         <div className="auth-form-wrap">
           <div className="auth-form">
@@ -179,7 +180,7 @@ export default function LoginPage() {
         </div>
       </div>
 
-      <AuthVisual variant="login" />
+      <AuthVisual />
     </div>
   );
 }

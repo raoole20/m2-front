@@ -129,3 +129,5 @@ Build order within this phase:
 9. `app/(app)/reports/index.tsx` — metrics shell (Manager+)
 10. `app/(app)/settings/index.tsx` — settings (Admin only)
 11. `app/(auth)/onboarding.tsx` — name + avatar stub
+
+[] TODO: estudiar sobre mono repos

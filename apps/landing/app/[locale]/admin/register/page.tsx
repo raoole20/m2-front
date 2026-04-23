@@ -4,10 +4,14 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 
-import { auth, ApiError } from "@m2/api-client";
+import { auth, ApiError, createBrowserTokenStore, setTokenStore } from "@m2/api-client";
 import { AppIcon } from "../../../../src/components/m2/AppIcon";
 import { AuthVisual } from "../../../../src/components/m2/AuthVisual";
 import { SocialAuthButtons } from "../../../../src/components/m2/SocialAuthButtons";
+import { Logo } from "../../_components/Logo";
+
+const tokenStore = createBrowserTokenStore();
+setTokenStore(tokenStore);
 
 const STRENGTH_LABELS = ["Débil", "Débil", "Media", "Buena", "Fuerte"];
 const STRENGTH_COLORS = ["#ef4444", "#ef4444", "#f59e0b", "#22c55e", "#10b981"];
@@ -63,7 +67,6 @@ export default function RegisterPage() {
         password: pw,
         name: `${firstName.trim()} ${lastName.trim()}`.trim(),
       });
-      router.push(`${base}/2fa?email=${encodeURIComponent(email.trim())}&mode=verify`);
     } catch (err) {
       if (err instanceof ApiError) {
         if (err.code === "CONFLICT") {
@@ -76,8 +79,31 @@ export default function RegisterPage() {
       } else {
         setError("Error de conexión. Intenta de nuevo.");
       }
-    } finally {
       setLoading(false);
+      return;
+    }
+
+    try {
+      const loginResult = await auth.login({
+        email: email.trim().toLowerCase(),
+        password: pw,
+      });
+      tokenStore.set({
+        accessToken: loginResult.accessToken,
+        refreshToken: loginResult.refreshToken,
+      });
+      router.push(`${base}/onboarding`);
+    } catch (err) {
+      if (err instanceof ApiError && err.message === "EMAIL_NOT_VERIFIED") {
+        router.push(
+          `${base}/login?verifyEmail=${encodeURIComponent(email.trim().toLowerCase())}`,
+        );
+      } else {
+        setError(
+          "Cuenta creada, pero no pudimos iniciar sesión automáticamente. Intenta entrar manualmente.",
+        );
+        setLoading(false);
+      }
     }
   }
 
@@ -85,7 +111,7 @@ export default function RegisterPage() {
     <div className="m2-app auth">
       <div className="auth-form-col">
         <Link href={`${base}/dashboard`} className="auth-logo">
-          <span className="mark">m</span>M2
+          <Logo height={28} />
         </Link>
         <div className="auth-form-wrap">
           <div className="auth-form">
@@ -248,7 +274,7 @@ export default function RegisterPage() {
         </div>
       </div>
 
-      <AuthVisual variant="register" />
+      <AuthVisual />
     </div>
   );
 }

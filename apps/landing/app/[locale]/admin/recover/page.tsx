@@ -6,6 +6,7 @@ import { useState } from "react";
 
 import { AppIcon } from "../../../../src/components/m2/AppIcon";
 import { AuthVisual } from "../../../../src/components/m2/AuthVisual";
+import { Logo } from "../../_components/Logo";
 
 export default function RecoverPage() {
   const pathname = usePathname() ?? "";
@@ -18,7 +19,7 @@ export default function RecoverPage() {
     <div className="m2-app auth">
       <div className="auth-form-col">
         <Link href={`${base}/login`} className="auth-logo">
-          <span className="mark">m</span>M2
+          <Logo height={28} />
         </Link>
         <div className="auth-form-wrap">
           <div className="auth-form">
@@ -102,7 +103,7 @@ export default function RecoverPage() {
         </div>
       </div>
 
-      <AuthVisual variant="recover" />
+      <AuthVisual />
     </div>
   );
 }
