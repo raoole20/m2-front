@@ -3,8 +3,8 @@
 import { usePathname, useRouter } from "next/navigation";
 import { useState, type ReactNode } from "react";
 
-import { AppIcon } from "../../../../src/components/m2/AppIcon";
-import { AppShell } from "../../../../src/components/m2/AppShell";
+import { AppIcon } from "../../../../../src/components/m2/AppIcon";
+import { AppShell } from "../../../../../src/components/m2/AppShell";
 
 type TabKey =
   | "profile"

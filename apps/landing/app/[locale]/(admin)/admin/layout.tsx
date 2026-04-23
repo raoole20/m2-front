@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
-import { AdminProviders } from "./AdminProviders";
+import { AdminProviders } from "@/src/components/AdminProviders";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {

@@ -5,9 +5,9 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { usePathname, useRouter } from "next/navigation";
 import { useMemo, type ReactNode, useEffect } from "react";
 
-import { ToastProvider } from "../../../src/components/ToastProvider";
-import { useAuth } from "../../../src/hooks/use-auth";
-import { createQueryClient } from "../../../src/lib/query-client";
+import { ToastProvider } from "./ToastProvider";
+import { useAuth } from "../hooks/use-auth";
+import { createQueryClient } from "../lib/query-client";
 
 const AUTH_ROUTES = ["/login", "/register", "/recover", "/2fa", "/onboarding"];
 

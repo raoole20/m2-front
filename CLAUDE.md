@@ -54,6 +54,35 @@ import { colors } from '@/design';
 
 ---
 
+## Routing Convention — `apps/landing`
+
+El árbol de `apps/landing/app/[locale]/` se organiza con **dos route groups de primer nivel**. Cada grupo es un contenedor organizacional; el prefijo de URL lo da un segmento normal (sin paréntesis) dentro del grupo cuando aplica.
+
+| Grupo | Contenido | URL prefix |
+|---|---|---|
+| `(landing)/` | Páginas públicas de marketing (contact, y futuros about/pricing/blog). | ninguno — `/es/contact` |
+| `(admin)/admin/` | Toda la app admin. El segmento `admin/` dentro del grupo da el prefijo. El `layout.tsx` vive en `admin/`. | `/admin/*` |
+
+La home (`[locale]/page.tsx`) se queda en la raíz del locale; hereda directo del layout de i18n y no necesita el wrapper de marketing.
+
+### Reglas para crear rutas nuevas
+
+1. **Paréntesis = organizacional, sin paréntesis = URL.** `(admin)` no aparece en URL; `admin/` sí. Nunca uses un segmento URL solo para agrupar — usa un route group.
+2. **Página pública nueva** → `app/[locale]/(landing)/<segmento>/page.tsx`.
+3. **Página admin nueva** → `app/[locale]/(admin)/admin/<segmento>/page.tsx`.
+4. **Nueva área de primer nivel** (ej. portal cliente) → nuevo grupo `(portal)/portal/...` siguiendo el mismo patrón grupo + segmento.
+5. **Componentes no-ruta** nunca viven dentro de `app/`. Van a `apps/landing/src/components/` con esta estructura:
+   - `src/components/landing/` → componentes de la landing pública (Hero, Nav, Footer, Pricing, etc.)
+   - `src/components/m2/` → componentes específicos del admin (AppShell, AppIcon, AuthVisual…)
+   - `src/components/` (raíz) → componentes compartidos entre áreas (`Logo`, `ToastProvider`) y providers (`AdminProviders`)
+   - `components/ui/` (raíz de landing) → primitivos tipo shadcn (button, carousel) — existente
+   Importa con alias: `import { Hero } from "@/src/components/landing/Hero"`.
+6. **Archivos SEO/CSS raíz** (`robots.ts`, `sitemap.ts`, `globals.css`, `m2.css`, `app/layout.tsx`) viven en `app/` y no se mueven — son especiales de Next.js.
+
+> `apps/mobile` ya usa su propia convención con route groups `(auth)` y `(app)` de Expo Router. No aplica la regla de arriba.
+
+---
+
 ## Phases Status
 
 | Phase | Description | Status |

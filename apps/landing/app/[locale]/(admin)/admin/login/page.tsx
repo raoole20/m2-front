@@ -5,10 +5,10 @@ import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 
 import { auth, createBrowserTokenStore, setTokenStore, ApiError } from "@m2/api-client";
-import { AppIcon } from "../../../../src/components/m2/AppIcon";
-import { AuthVisual } from "../../../../src/components/m2/AuthVisual";
-import { SocialAuthButtons } from "../../../../src/components/m2/SocialAuthButtons";
-import { Logo } from "../../_components/Logo";
+import { AppIcon } from "../../../../../src/components/m2/AppIcon";
+import { AuthVisual } from "../../../../../src/components/m2/AuthVisual";
+import { SocialAuthButtons } from "../../../../../src/components/m2/SocialAuthButtons";
+import { Logo } from "@/src/components/Logo";
 
 const tokenStore = createBrowserTokenStore();
 setTokenStore(tokenStore);

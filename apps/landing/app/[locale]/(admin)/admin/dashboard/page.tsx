@@ -3,9 +3,9 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import { AppIcon } from "../../../../src/components/m2/AppIcon";
-import { AppShell } from "../../../../src/components/m2/AppShell";
-import { CONVERSATIONS } from "../../../../src/components/m2/mock-data";
+import { AppIcon } from "../../../../../src/components/m2/AppIcon";
+import { AppShell } from "../../../../../src/components/m2/AppShell";
+import { CONVERSATIONS } from "../../../../../src/components/m2/mock-data";
 
 type Segment = { label: string; v: number; col: string };
 

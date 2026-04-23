@@ -3,14 +3,14 @@
 import { useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 
-import { AppIcon } from "../../../../src/components/m2/AppIcon";
-import { AppShell } from "../../../../src/components/m2/AppShell";
+import { AppIcon } from "../../../../../src/components/m2/AppIcon";
+import { AppShell } from "../../../../../src/components/m2/AppShell";
 import {
   CONVERSATIONS,
   THREAD_LAURA,
   type ChannelKey,
   type ConversationMock,
-} from "../../../../src/components/m2/mock-data";
+} from "../../../../../src/components/m2/mock-data";
 
 type Filter = "all" | "unread" | "hot" | "human";
 

@@ -18,6 +18,7 @@ import { MeshGradient } from '@/components/ui/MeshGradient';
 import { KPICard } from '@/components/ui/KPICard';
 import { AIInsightCard } from '@/components/ai/AIInsightCard';
 import { Pressable } from '@/components/ui/Pressable';
+import { Logo } from '@/components/ui/Logo';
 import { useColors } from '@/hooks/useColors';
 import { spacing, borderRadius, fontFamily, typography } from '@m2/design';
 import type { ThemeColors } from '@m2/design';
@@ -81,7 +82,7 @@ export default function HomeScreen() {
         >
           {/* ── Brand header ─────────────────────────────────────────────── */}
           <Animated.View entering={FadeInDown.duration(200).delay(0)} style={styles.brandRow}>
-            <Text style={styles.brandText}>motomoto</Text>
+            <Logo size="sm" />
             <Pressable
               onPress={() => router.push('/settings' as never)}
               style={styles.gearButton}
@@ -257,13 +258,6 @@ const createStyles = (colors: ThemeColors) => StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingTop: spacing[2],
-  },
-  brandText: {
-    fontSize: 20,
-    lineHeight: 28,
-    fontWeight: '700',
-    fontFamily: fontFamily.displayBold,
-    color: colors.primary,
   },
   gearButton: {
     width: 40,

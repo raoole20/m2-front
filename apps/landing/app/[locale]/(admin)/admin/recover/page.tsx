@@ -4,9 +4,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
-import { AppIcon } from "../../../../src/components/m2/AppIcon";
-import { AuthVisual } from "../../../../src/components/m2/AuthVisual";
-import { Logo } from "../../_components/Logo";
+import { AppIcon } from "../../../../../src/components/m2/AppIcon";
+import { AuthVisual } from "../../../../../src/components/m2/AuthVisual";
+import { Logo } from "@/src/components/Logo";
 
 export default function RecoverPage() {
   const pathname = usePathname() ?? "";

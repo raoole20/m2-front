@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 
-import { AppIcon } from "../../../../src/components/m2/AppIcon";
+import { AppIcon } from "../../../../../src/components/m2/AppIcon";
 
 type ChannelDef = { k: "wa" | "ig" | "tg" | "em"; name: string; desc: string; icon: string };
 

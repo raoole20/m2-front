@@ -4,18 +4,18 @@ import { notFound } from "next/navigation";
 import { defaultLocale, locales } from "@m2/i18n";
 
 import type { Lang } from "../../lib/content";
-import { Channels } from "./_components/Channels";
-import { CursorGlow } from "./_components/CursorGlow";
-import { FinalCTA } from "./_components/FinalCTA";
-import { Footer } from "./_components/Footer";
-import { Hero } from "./_components/Hero";
-import { HowItWorks } from "./_components/HowItWorks";
-import { InboxSection } from "./_components/InboxSection";
-import { LogosBar } from "./_components/LogosBar";
-import { MetricsStrip } from "./_components/MetricsStrip";
-import { Nav } from "./_components/Nav";
-import { Pricing } from "./_components/Pricing";
-import { Testimonials } from "./_components/Testimonials";
+import { Channels } from "@/src/components/landing/Channels";
+import { CursorGlow } from "@/src/components/landing/CursorGlow";
+import { FinalCTA } from "@/src/components/landing/FinalCTA";
+import { Footer } from "@/src/components/landing/Footer";
+import { Hero } from "@/src/components/landing/Hero";
+import { HowItWorks } from "@/src/components/landing/HowItWorks";
+import { InboxSection } from "@/src/components/landing/InboxSection";
+import { LogosBar } from "@/src/components/landing/LogosBar";
+import { MetricsStrip } from "@/src/components/landing/MetricsStrip";
+import { Nav } from "@/src/components/landing/Nav";
+import { Pricing } from "@/src/components/landing/Pricing";
+import { Testimonials } from "@/src/components/landing/Testimonials";
 
 export default async function LandingPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
