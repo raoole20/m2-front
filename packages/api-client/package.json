@@ -4,16 +4,29 @@
   "private": true,
   "type": "module",
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/index.ts",
+    "./expo": "./src/expo/index.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit",
     "build": "tsc -p tsconfig.json",
     "generate:api": "tsx scripts/generate.ts"
   },
+  "dependencies": {
+    "@m2/types": "workspace:*"
+  },
+  "peerDependencies": {
+    "expo-secure-store": "*"
+  },
+  "peerDependenciesMeta": {
+    "expo-secure-store": {
+      "optional": true
+    }
+  },
   "devDependencies": {
     "@types/node": "^22.13.9",
     "@m2/config": "workspace:*",
+    "expo-secure-store": "~55.0.9",
     "openapi-typescript": "^7.5.2",
     "tsx": "^4.19.2",
     "typescript": "^5.6.3"

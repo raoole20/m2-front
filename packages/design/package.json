@@ -11,6 +11,10 @@
       "types": "./src/index.ts",
       "default": "./src/index.ts"
     },
+    "./v2": {
+      "types": "./src/v2/index.ts",
+      "default": "./src/v2/index.ts"
+    },
     "./tailwind-preset": "./src/tailwind-preset.ts",
     "./tailwind-preset.cjs": "./tailwind-preset.cjs",
     "./css/tokens.css": "./css/tokens.css"
@@ -22,7 +26,46 @@
   "dependencies": {
     "@m2/types": "workspace:*"
   },
+  "peerDependencies": {
+    "@react-native-masked-view/masked-view": "*",
+    "@shopify/react-native-skia": "*",
+    "expo-blur": "*",
+    "expo-font": "*",
+    "expo-linear-gradient": "*",
+    "react": "*",
+    "react-native": "*",
+    "react-native-svg": "*"
+  },
+  "peerDependenciesMeta": {
+    "@react-native-masked-view/masked-view": {
+      "optional": true
+    },
+    "@shopify/react-native-skia": {
+      "optional": true
+    },
+    "expo-blur": {
+      "optional": true
+    },
+    "expo-font": {
+      "optional": true
+    },
+    "expo-linear-gradient": {
+      "optional": true
+    },
+    "react-native-svg": {
+      "optional": true
+    }
+  },
   "devDependencies": {
+    "@react-native-masked-view/masked-view": "0.3.2",
+    "@shopify/react-native-skia": "2.4.18",
+    "@types/react": "~19.2.2",
+    "expo-blur": "~55.0.10",
+    "expo-font": "~55.0.4",
+    "expo-linear-gradient": "~55.0.9",
+    "react": "19.2.0",
+    "react-native": "0.83.2",
+    "react-native-svg": "15.15.3",
     "typescript": "~5.9.2"
   }
 }

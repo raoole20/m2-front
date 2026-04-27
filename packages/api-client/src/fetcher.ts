@@ -10,10 +10,19 @@ import { clearSessionSentinel } from "./session-cookie";
 import type { TokenStore } from "./token-store";
 import { unwrap, type Envelope } from "./unwrap";
 
+export class MissingApiUrlError extends Error {
+  override readonly name = "MissingApiUrlError";
+  constructor() {
+    super(
+      "Missing API base URL — define EXPO_PUBLIC_API_URL (mobile) or NEXT_PUBLIC_API_URL (web) in your environment.",
+    );
+  }
+}
+
 function getBaseUrl(): string {
-  const url = process.env.NEXT_PUBLIC_API_URL;
+  const url = process.env.EXPO_PUBLIC_API_URL ?? process.env.NEXT_PUBLIC_API_URL;
   if (!url) {
-    throw new Error("NEXT_PUBLIC_API_URL missing — define it in .env.local");
+    throw new MissingApiUrlError();
   }
   return url;
 }
