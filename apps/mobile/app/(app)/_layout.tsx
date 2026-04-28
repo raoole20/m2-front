@@ -1,32 +1,28 @@
-import { Tabs } from 'expo-router';
+import { Redirect, Tabs } from 'expo-router';
 
-import { TabBar } from '@/components/navigation/TabBar';
-import { useRole } from '@/hooks/useRole';
-import { useColors } from '@/hooks/useColors';
+import { FloatingTabBarV2 } from '@/components/v2';
+import { useAuthStore } from '@/store/useAuthStore';
 
 export default function AppLayout() {
-  const isManager = useRole('manager');
-  const colors = useColors();
+  const isAuthenticated = useAuthStore((s) => s.isAuthenticated);
+
+  if (!isAuthenticated) {
+    return <Redirect href="/(auth)/login" />;
+  }
 
   return (
     <Tabs
-      tabBar={(props) => <TabBar {...props} />}
-      screenOptions={{
-        headerShown: false,
-        sceneStyle: { backgroundColor: colors.background.primary },
-      }}
+      tabBar={(props) => <FloatingTabBarV2 {...props} />}
+      screenOptions={{ headerShown: false }}
     >
-      <Tabs.Screen name="home" options={{ title: 'Inicio' }} />
-      <Tabs.Screen name="inbox" options={{ title: 'Mensajes' }} />
-      <Tabs.Screen name="ai" options={{ title: 'IA' }} />
-      <Tabs.Screen
-        name="team"
-        options={{ title: 'Equipo', href: isManager ? undefined : null }}
-      />
-      <Tabs.Screen name="profile" options={{ title: 'Perfil' }} />
-      {/* Hidden from tab bar — accessible via navigation */}
-      <Tabs.Screen name="reports" options={{ href: null }} />
-      <Tabs.Screen name="settings" options={{ href: null }} />
+      <Tabs.Screen name="inbox" options={{ title: 'Inbox' }} />
+      {/*
+        `channels` route is created in Lote B. Declared here so the
+        FloatingTabBarV2 reserves its slot once the directory lands.
+      */}
+      <Tabs.Screen name="channels" options={{ title: 'Channels' }} />
+      <Tabs.Screen name="ai" options={{ title: 'AI' }} />
+      <Tabs.Screen name="profile" options={{ title: 'Profile' }} />
     </Tabs>
   );
 }

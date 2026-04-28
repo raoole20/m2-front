@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Stack, useRouter, useSegments, SplashScreen } from 'expo-router';
+import { Stack, SplashScreen } from 'expo-router';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
@@ -13,31 +13,26 @@ import {
   InstrumentSerif_400Regular,
   InstrumentSerif_400Regular_Italic,
 } from '@expo-google-fonts/instrument-serif';
+import { QueryClientProvider } from '@tanstack/react-query';
 
+import { bootstrapApi } from '@/lib/api';
+import { queryClient } from '@/lib/queryClient';
 import { useAuthStore } from '@/store/useAuthStore';
 import { useThemeStore } from '@/store/useThemeStore';
-import { useShallow } from 'zustand/react/shallow';
 import { useColors, useIsDark } from '@/hooks/useColors';
 import { ToastProvider } from '@/components/ui/Toast';
 
-// Prevent splash screen from auto-hiding before fonts and auth are ready
+// Prevent splash screen from auto-hiding before bootstrap completes.
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  const { isAuthenticated, rehydrate } = useAuthStore(
-    useShallow((s) => ({
-      isAuthenticated: s.isAuthenticated,
-      rehydrate: s.rehydrate,
-    }))
-  );
+  const rehydrateAuth = useAuthStore((s) => s.rehydrate);
   const rehydrateTheme = useThemeStore((s) => s.rehydrate);
 
   const colors = useColors();
   const isDark = useIsDark();
 
-  const [isReady, setIsReady] = useState(false);
-  const segments = useSegments();
-  const router = useRouter();
+  const [bootstrapped, setBootstrapped] = useState(false);
 
   const [fontsLoaded, fontError] = useFonts({
     Inter_400Regular,
@@ -47,26 +42,45 @@ export default function RootLayout() {
     InstrumentSerif_400Regular_Italic,
   });
 
-  // Log font errors but proceed with system font fallback
+  // Log font errors but proceed with system font fallback.
   useEffect(() => {
     if (fontError) {
-      console.warn('[RootLayout] Font loading failed, falling back to system fonts:', fontError.message);
+      console.warn(
+        '[RootLayout] Font loading failed, falling back to system fonts:',
+        fontError.message,
+      );
     }
   }, [fontError]);
 
-  // Rehydrate auth and theme state
+  // Bootstrap order:
+  //  1. Rehydrate the secure token store + wire it into the api-client.
+  //  2. Rehydrate the auth user + theme preference from secure storage.
+  //  3. Mark ready so the splash can hide and the first render proceeds.
   useEffect(() => {
-    Promise.all([rehydrate(), rehydrateTheme()]).finally(() => setIsReady(true));
-  }, [rehydrate, rehydrateTheme]);
+    let cancelled = false;
+    (async () => {
+      try {
+        await bootstrapApi();
+        await Promise.all([rehydrateAuth(), rehydrateTheme()]);
+      } catch (err) {
+        console.warn('[RootLayout] Bootstrap failed:', err);
+      } finally {
+        if (!cancelled) setBootstrapped(true);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [rehydrateAuth, rehydrateTheme]);
 
-  // Hide splash screen once fonts and auth are ready
+  // Hide splash once everything is ready.
   useEffect(() => {
-    if ((fontsLoaded || fontError) && isReady) {
+    if (bootstrapped && (fontsLoaded || fontError)) {
       SplashScreen.hideAsync();
     }
-  }, [fontsLoaded, fontError, isReady]);
+  }, [bootstrapped, fontsLoaded, fontError]);
 
-  // Safety timeout: hide splash screen after 3 seconds no matter what
+  // Safety timeout: hide splash after 3 seconds no matter what.
   useEffect(() => {
     const t = setTimeout(() => {
       SplashScreen.hideAsync();
@@ -74,32 +88,23 @@ export default function RootLayout() {
     return () => clearTimeout(t);
   }, []);
 
-  // Auth routing guard
-  useEffect(() => {
-    if (!isReady) return;
-    const inAuthGroup = segments[0] === '(auth)';
-    if (!isAuthenticated && !inAuthGroup) {
-      router.replace('/(auth)/login' as never);
-    } else if (isAuthenticated && inAuthGroup) {
-      router.replace('/(app)/home' as never);
-    }
-  }, [isAuthenticated, isReady, segments, router]);
-
-  if (!isReady || (!fontsLoaded && !fontError)) return null;
+  if (!bootstrapped || (!fontsLoaded && !fontError)) return null;
 
   return (
     <GestureHandlerRootView style={{ flex: 1, backgroundColor: colors.background.primary }}>
       <SafeAreaProvider>
-        <ToastProvider>
-          <StatusBar style={isDark ? 'light' : 'dark'} />
-          <Stack
-            screenOptions={{
-              headerShown: false,
-              contentStyle: { backgroundColor: colors.background.primary },
-              animation: 'fade',
-            }}
-          />
-        </ToastProvider>
+        <QueryClientProvider client={queryClient}>
+          <ToastProvider>
+            <StatusBar style={isDark ? 'light' : 'dark'} />
+            <Stack
+              screenOptions={{
+                headerShown: false,
+                contentStyle: { backgroundColor: colors.background.primary },
+                animation: 'fade',
+              }}
+            />
+          </ToastProvider>
+        </QueryClientProvider>
       </SafeAreaProvider>
     </GestureHandlerRootView>
   );

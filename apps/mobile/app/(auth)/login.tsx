@@ -1,100 +1,77 @@
-import React, { useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import {
   ActivityIndicator,
   KeyboardAvoidingView,
   Platform,
+  Pressable,
   ScrollView,
   StyleSheet,
-  Text,
+  TextInput,
   View,
 } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import Animated, {
-  FadeInDown,
-  FadeInUp,
-} from 'react-native-reanimated';
 
+import { BrandmarkV2 } from '@/components/v2';
+import { ApiError } from '@m2/api-client';
 import { useAuthStore } from '@/store/useAuthStore';
-import { Pressable } from '@/components/ui/Pressable';
-import { GlassCard } from '@/components/ui/GlassCard';
-import { AuraGlow } from '@/components/ui/AuraGlow';
-import { SunkenInput } from '@/components/ui/SunkenInput';
-import { GradientButton } from '@/components/ui/GradientButton';
-import { useColors } from '@/hooks/useColors';
 import {
-  spacing,
-  typography,
-  fontFamily,
-  borderRadius,
-  shadows,
-  type ThemeColors,
-} from '@m2/design';
+  Atmosphere,
+  Body,
+  Caption,
+  colorsV2,
+  Display,
+  Glass,
+  radiiV2,
+  SerifItalic,
+  shadowsV2,
+  typographyV2,
+} from '@/theme';
+
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const MIN_PASSWORD_LENGTH = 8;
+
+function isApiError(value: unknown): value is ApiError {
+  return value instanceof ApiError;
+}
 
 export default function LoginScreen() {
-  const colors = useColors();
-  const styles = useMemo(() => createStyles(colors), [colors]);
-
-  const signIn = useAuthStore((s) => s.signIn);
-  const signInWithEmail = useAuthStore((s) => s.signInWithEmail);
+  const router = useRouter();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [loadingGoogle, setLoadingGoogle] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [submitting, setSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const canSubmit = email.trim().length > 0 && password.length >= 8;
+  const isEmailValid = useMemo(() => EMAIL_REGEX.test(email.trim()), [email]);
+  const isPasswordValid = password.length >= MIN_PASSWORD_LENGTH;
+  const canSubmit = isEmailValid && isPasswordValid && !submitting;
 
-  async function handleEmailSignIn() {
+  async function handleSubmit() {
     if (!canSubmit) return;
-    setLoading(true);
-    setError(null);
+    setSubmitting(true);
+    setErrorMessage(null);
     try {
-      await signInWithEmail(email.trim(), password);
-    } catch {
-      setError('No se pudo iniciar sesion. Verifica tus credenciales.');
+      await useAuthStore.getState().signInWithEmail(email.trim(), password);
+      router.replace('/(app)/inbox');
+    } catch (err: unknown) {
+      if (isApiError(err) && err.message) {
+        setErrorMessage(err.message);
+      } else {
+        setErrorMessage('Error al iniciar sesión');
+      }
     } finally {
-      setLoading(false);
+      setSubmitting(false);
     }
   }
-
-  async function handleGoogleSignIn() {
-    setLoadingGoogle(true);
-    setError(null);
-    try {
-      await signIn();
-    } catch {
-      setError('No se pudo iniciar sesion con Google. Intenta de nuevo.');
-    } finally {
-      setLoadingGoogle(false);
-    }
-  }
-
-  const isLoading = loading || loadingGoogle;
-
-  const eyeToggle = (
-    <Pressable
-      onPress={() => setShowPassword((v) => !v)}
-      disabled={isLoading}
-    >
-      <MaterialCommunityIcons
-        name={showPassword ? 'eye-off-outline' : 'eye-outline'}
-        size={20}
-        color={colors.onSurfaceVariant}
-      />
-    </Pressable>
-  );
 
   return (
     <View style={styles.root}>
-      {/* Decorative aura background */}
-      <AuraGlow />
-
+      <Atmosphere mood="profile" intensity="rich" />
       <SafeAreaView style={styles.safeArea}>
         <KeyboardAvoidingView
-          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          behavior={Platform.OS === 'ios' ? 'padding' : undefined}
           style={styles.keyboardView}
         >
           <ScrollView
@@ -102,121 +79,79 @@ export default function LoginScreen() {
             keyboardShouldPersistTaps="handled"
             showsVerticalScrollIndicator={false}
           >
-            {/* -- Hero ---------------------------------------- */}
-            <Animated.View entering={FadeInUp.duration(600).delay(100)} style={styles.hero}>
-              <View style={styles.iconWrapper}>
-                <MaterialCommunityIcons
-                  name="motorbike"
-                  size={64}
-                  color={colors.primary}
-                />
-              </View>
-              <Text style={styles.appName}>motomoto</Text>
-              <Text style={styles.tagline}>Precision CRM Systems</Text>
-            </Animated.View>
+            <View style={styles.brandmarkWrap}>
+              <BrandmarkV2 size={80} />
+            </View>
 
-            {/* -- Login Form ---------------------------------- */}
-            <Animated.View entering={FadeInDown.duration(600).delay(300)}>
-              <GlassCard style={styles.formCard}>
-                <Text style={styles.welcomeText}>Bienvenido de nuevo</Text>
+            <View style={styles.headerBlock}>
+              <Display style={styles.headline}>
+                Sign in to <SerifItalic size={typographyV2.display.fontSize}>Motomoto</SerifItalic>
+              </Display>
+              <Body color={colorsV2.text.muted} style={styles.subtitle}>
+                Tu workspace editorial para conversaciones impecables.
+              </Body>
+            </View>
 
-                {error !== null && (
-                  <View style={styles.errorContainer}>
-                    <MaterialCommunityIcons
-                      name="alert-circle-outline"
-                      size={16}
-                      color={colors.error}
-                    />
-                    <Text style={styles.errorText}>{error}</Text>
-                  </View>
-                )}
-
-                {/* Email input */}
-                <SunkenInput
+            <View style={styles.form}>
+              <Glass variant="input" style={styles.inputGlass}>
+                <TextInput
                   value={email}
                   onChangeText={setEmail}
-                  placeholder="Correo electronico"
+                  placeholder="Correo electrónico"
+                  placeholderTextColor={colorsV2.text.muted}
                   keyboardType="email-address"
                   autoCapitalize="none"
                   autoComplete="email"
-                  editable={!isLoading}
-                  leftIcon="email-outline"
+                  autoCorrect={false}
+                  editable={!submitting}
+                  style={styles.input}
                 />
+              </Glass>
 
-                {/* Password input */}
-                <SunkenInput
+              <Glass variant="input" style={styles.inputGlass}>
+                <TextInput
                   value={password}
                   onChangeText={setPassword}
-                  placeholder="Contrasena"
-                  secureTextEntry={!showPassword}
+                  placeholder="Contraseña"
+                  placeholderTextColor={colorsV2.text.muted}
+                  secureTextEntry
                   autoCapitalize="none"
                   autoComplete="password"
-                  editable={!isLoading}
-                  leftIcon="lock-outline"
-                  rightAccessory={eyeToggle}
+                  autoCorrect={false}
+                  editable={!submitting}
+                  style={styles.input}
                 />
+              </Glass>
 
-                {/* Forgot password link */}
-                <Pressable onPress={() => {}} style={styles.forgotButton}>
-                  <Text style={styles.forgotText}>Olvido su contrasena?</Text>
-                </Pressable>
-
-                {/* Sign in button */}
-                <GradientButton
-                  label="Iniciar sesion"
-                  onPress={handleEmailSignIn}
-                  disabled={!canSubmit || isLoading}
-                  loading={loading}
-                  fullWidth
-                />
-
-                {/* Google Workspace button */}
-                <Pressable
-                  onPress={handleGoogleSignIn}
-                  style={styles.googleButton}
-                  disabled={isLoading}
-                >
-                  {loadingGoogle ? (
-                    <ActivityIndicator color={colors.onSurface} size="small" />
-                  ) : (
-                    <>
-                      <MaterialCommunityIcons
-                        name="google"
-                        size={22}
-                        color={colors.onSurface}
-                      />
-                      <Text style={styles.googleButtonLabel}>Google Workspace</Text>
-                    </>
-                  )}
-                </Pressable>
-
-                {/* Biometric row */}
-                <View style={styles.biometricRow}>
-                  <Pressable onPress={() => {}} style={styles.biometricIcon}>
-                    <MaterialCommunityIcons
-                      name="fingerprint"
-                      size={28}
-                      color={colors.primary}
-                    />
-                  </Pressable>
-                  <Pressable onPress={() => {}} style={styles.biometricIcon}>
-                    <MaterialCommunityIcons
-                      name="face-recognition"
-                      size={28}
-                      color={colors.primary}
-                    />
-                  </Pressable>
+              {errorMessage !== null && (
+                <View style={styles.errorChip}>
+                  <Caption style={styles.errorText}>{errorMessage}</Caption>
                 </View>
-              </GlassCard>
-            </Animated.View>
+              )}
 
-            {/* -- Bottom link --------------------------------- */}
-            <Animated.View entering={FadeInDown.duration(600).delay(500)}>
-              <Text style={styles.bottomText}>
-                No tienes una cuenta?{' '}
-                <Text style={styles.bottomLink}>Solicitar acceso</Text>
-              </Text>
-            </Animated.View>
+              <Pressable
+                accessibilityRole="button"
+                accessibilityState={{ disabled: !canSubmit }}
+                onPress={handleSubmit}
+                disabled={!canSubmit}
+                style={[styles.submitWrap, !canSubmit ? styles.submitDisabled : null]}
+              >
+                <LinearGradient
+                  colors={[colorsV2.accent[100], colorsV2.accent[300]]}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 1, y: 1 }}
+                  style={styles.submitGradient}
+                >
+                  {submitting ? (
+                    <ActivityIndicator color="#ffffff" />
+                  ) : (
+                    <Body color={colorsV2.text.primary} style={styles.submitLabel}>
+                      Iniciar sesión
+                    </Body>
+                  )}
+                </LinearGradient>
+              </Pressable>
+            </View>
           </ScrollView>
         </KeyboardAvoidingView>
       </SafeAreaView>
@@ -224,10 +159,10 @@ export default function LoginScreen() {
   );
 }
 
-const createStyles = (colors: ThemeColors) => StyleSheet.create({
+const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: colors.surfaceBackground,
+    backgroundColor: colorsV2.bg.base,
   },
   safeArea: {
     flex: 1,
@@ -237,111 +172,73 @@ const createStyles = (colors: ThemeColors) => StyleSheet.create({
   },
   scrollContent: {
     flexGrow: 1,
-    paddingHorizontal: spacing[6],
-    paddingBottom: spacing[8],
+    paddingHorizontal: 24,
+    paddingVertical: 32,
     justifyContent: 'center',
   },
-
-  /* Hero */
-  hero: {
+  brandmarkWrap: {
     alignItems: 'center',
-    marginBottom: spacing[10],
+    marginBottom: 24,
   },
-  iconWrapper: {
-    marginBottom: spacing[4],
-    ...(Platform.OS === 'ios' ? shadows.glow(colors.primary, 24, 0.6) : undefined),
-  },
-  appName: {
-    fontSize: 36,
-    fontWeight: '800',
-    fontFamily: fontFamily.displayExtraBold,
-    letterSpacing: -0.02 * 36,
-    color: colors.onSurface,
-    marginBottom: spacing[1],
-  },
-  tagline: {
-    ...typography.subhead,
-    fontFamily: fontFamily.bodyRegular,
-    color: colors.onSurfaceVariant,
-  },
-
-  /* Form card */
-  formCard: {
-    padding: spacing[6],
-    gap: spacing[4],
-  },
-  welcomeText: {
-    ...typography.headline,
-    fontFamily: fontFamily.bodyRegular,
-    color: colors.onSurface,
-    marginBottom: spacing[1],
-  },
-
-  /* Error */
-  errorContainer: {
-    flexDirection: 'row',
+  headerBlock: {
     alignItems: 'center',
-    gap: spacing[2],
-    backgroundColor: colors.errorContainer,
-    borderRadius: borderRadius.md,
-    paddingVertical: spacing[2],
-    paddingHorizontal: spacing[3],
+    marginBottom: 32,
+  },
+  headline: {
+    textAlign: 'center',
+  },
+  subtitle: {
+    marginTop: 12,
+    textAlign: 'center',
+  },
+  form: {
+    gap: 14,
+  },
+  inputGlass: {
+    borderRadius: radiiV2.md,
+    paddingHorizontal: 16,
+    paddingVertical: Platform.OS === 'ios' ? 14 : 6,
+    minHeight: 52,
+    justifyContent: 'center',
+  },
+  input: {
+    color: colorsV2.text.primary,
+    fontFamily: typographyV2.body.fontFamily,
+    fontSize: typographyV2.body.fontSize,
+    lineHeight: typographyV2.body.lineHeight,
+    paddingVertical: Platform.OS === 'ios' ? 0 : 8,
+  },
+  errorChip: {
+    alignSelf: 'stretch',
+    paddingVertical: 10,
+    paddingHorizontal: 14,
+    borderRadius: radiiV2.sm,
+    backgroundColor: 'rgba(239, 68, 68, 0.18)',
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: 'rgba(239, 68, 68, 0.4)',
   },
   errorText: {
-    ...typography.bodySmall,
-    color: colors.error,
-    flex: 1,
-  },
-
-  /* Forgot password */
-  forgotButton: {
-    alignSelf: 'flex-end',
-  },
-  forgotText: {
-    ...typography.labelMedium,
-    color: colors.primary,
-  },
-
-  /* Google button */
-  googleButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: spacing[3],
-    backgroundColor: colors.glass.background,
-    borderRadius: borderRadius.sm,
-    borderWidth: StyleSheet.hairlineWidth,
-    borderColor: colors.outlineVariant,
-    paddingVertical: spacing[4],
-    minHeight: 52,
-  },
-  googleButtonLabel: {
-    ...typography.labelLarge,
-    fontFamily: fontFamily.bodySemiBold,
-    color: colors.onSurface,
-  },
-
-  /* Biometric row */
-  biometricRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: spacing[6],
-    marginTop: spacing[1],
-  },
-  biometricIcon: {
-    padding: spacing[2],
-  },
-
-  /* Bottom */
-  bottomText: {
-    ...typography.bodySmall,
-    color: colors.onSurfaceVariant,
+    color: colorsV2.state.danger,
     textAlign: 'center',
-    marginTop: spacing[6],
   },
-  bottomLink: {
-    color: colors.primary,
+  submitWrap: {
+    marginTop: 6,
+    borderRadius: radiiV2.pill,
+    overflow: 'hidden',
+    ...shadowsV2.glow.accent,
+  },
+  submitDisabled: {
+    opacity: 0.5,
+  },
+  submitGradient: {
+    minHeight: 52,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 24,
+    borderRadius: radiiV2.pill,
+  },
+  submitLabel: {
     fontWeight: '600',
+    letterSpacing: 0.2,
   },
 });
