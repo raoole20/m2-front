@@ -98,19 +98,21 @@
 
 > Single commit at the end of Phase 2 once every screen is on V2 + real API. Verify nothing imports each target before deletion.
 
-- [ ] 3.1 **Delete `apps/mobile/src/services/api.ts`** — legacy axios instance, hardcoded URL (mobile spec REQ "Removal of `apps/mobile/src/services/api.ts`"). Effort: **S**
+- [x] 3.1 **Delete `apps/mobile/src/services/api.ts`** — legacy axios instance, hardcoded URL (mobile spec REQ "Removal of `apps/mobile/src/services/api.ts`"). Effort: **S**
 
-- [ ] 3.2 **Delete mock service stubs** — remove `apps/mobile/src/services/auth.ts`, `conversations.ts`, `ai.ts`. Effort: **S**
+- [x] 3.2 **Delete mock service stubs** — remove `apps/mobile/src/services/auth.ts`, `conversations.ts`, `ai.ts`. Effort: **S**
 
-- [ ] 3.3 **Delete `apps/mobile/src/mock/` directory** — verified unused by any screen post-Phase 2 (mobile spec REQ "Mocks unwired from screens"). Effort: **S**
+- [x] 3.3 **Delete `apps/mobile/src/mock/` directory** — verified unused by any screen post-Phase 2 (mobile spec REQ "Mocks unwired from screens"). Effort: **S**
 
-- [ ] 3.4 **Delete legacy V1 components** — remove `apps/mobile/src/components/{ui,messaging,ai,navigation}/` after grepping that no screen V2 still imports them. Depends on 2.4–2.10. Effort: **S**
+- [x] 3.4 **Delete legacy V1 components** — remove `apps/mobile/src/components/{ui,messaging,ai,navigation}/` after grepping that no screen V2 still imports them. Depends on 2.4–2.10. Effort: **S**
+  - **Preserved** — `apps/mobile/src/components/ui/Toast.tsx` is still consumed by `apps/mobile/app/_layout.tsx` (`ToastProvider`); kept as the sole survivor of `components/ui/`. All other V1 atoms (`AuraGlow`, `Avatar`, `FilterTab`, `GlassCard`, `GradientButton`, `KPICard`, `Logo`, `MeshGradient`, `Pressable`, `RoleGate`, `Skeleton`, `SunkenInput`, `TeamMemberCard`) deleted along with the entire `messaging/`, `navigation/`, and `ai/` V1 trees.
+  - **Bonus cleanup** — `apps/mobile/app/(auth)/onboarding.tsx` (V1 stub, unreachable: no `router.push`/`Link` references it anywhere) was also deleted.
 
-- [ ] 3.5 **Delete WebSocket store + service** — remove `apps/mobile/src/store/useWebSocketStore.ts` and `apps/mobile/src/services/websocket.ts` (out of scope per proposal §2.2; not used by any V2 screen). Mobile spec REQ "Out-of-scope behavior" Scenario "No WebSocket connection at runtime". Effort: **S**
+- [x] 3.5 **Delete WebSocket store + service** — remove `apps/mobile/src/store/useWebSocketStore.ts` and `apps/mobile/src/services/websocket.ts` (out of scope per proposal §2.2; not used by any V2 screen). Mobile spec REQ "Out-of-scope behavior" Scenario "No WebSocket connection at runtime". Effort: **S**
 
-- [ ] 3.6 **Delete `useWebSocket` hook** — remove `apps/mobile/src/hooks/useWebSocket.ts` (out of scope). Effort: **S**
+- [x] 3.6 **Delete `useWebSocket` hook** — remove `apps/mobile/src/hooks/useWebSocket.ts` (out of scope). Effort: **S**
 
-- [ ] 3.7 **Final smoke: `pnpm -w typecheck`** — must pass with zero TS errors (proposal §9 Success Criteria). Effort: **S**
+- [x] 3.7 **Final smoke: `pnpm -w typecheck`** — must pass with zero TS errors (proposal §9 Success Criteria). Effort: **S**
 
 ---
 

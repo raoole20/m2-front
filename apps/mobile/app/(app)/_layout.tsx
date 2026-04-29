@@ -7,10 +7,10 @@ import { useAuthStore } from '@/store/useAuthStore';
 
 /**
  * Routes inside the `inbox` tab that must hide the floating tab bar.
- * Today only the conversation detail (`[id]/index` and `[id]/client`) need
- * to take over the full screen.
+ * Today only the conversation detail (`[id]/index`) needs to take over
+ * the full screen.
  */
-const INBOX_HIDDEN_ROUTES: ReadonlyArray<string> = ['[id]', '[id]/index', '[id]/client'];
+const INBOX_HIDDEN_ROUTES: ReadonlyArray<string> = ['[id]', '[id]/index'];
 
 function inboxTabBarStyle(
   route: RouteProp<ParamListBase, string>,
@@ -38,8 +38,8 @@ export default function AppLayout() {
         name="inbox"
         options={({ route }) => ({
           title: 'Inbox',
-          // Hide the floating tab bar on conversation detail (and the legacy
-          // V1 client sheet) so they can render edge-to-edge.
+          // Hide the floating tab bar on conversation detail so it can
+          // render edge-to-edge.
           tabBarStyle: inboxTabBarStyle(route),
         })}
       />

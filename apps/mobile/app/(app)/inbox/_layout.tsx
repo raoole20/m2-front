@@ -5,7 +5,6 @@ import { Stack } from 'expo-router';
  * Screens:
  *   index         → conversation list
  *   [id]/index    → chat view
- *   [id]/client   → contact profile sheet (modal slide-up)
  *
  * All headers are hidden; each screen manages its own navigation chrome.
  */
